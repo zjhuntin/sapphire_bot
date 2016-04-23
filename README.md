@@ -45,6 +45,10 @@ Commands start with a prefix, which is `!` by default.
   * `announce <message>` announces your message server-wide (user needs to have manage messages permission
   * `kickall` kicks all the members from the server, except you and the bot (user and the bot needs to have kick members permission).
 
+* Debugging
+
+  * `eval <code>` evaluates Ruby expression(s) (user needs to be owner of the bot).
+
 
 ### Support
 
