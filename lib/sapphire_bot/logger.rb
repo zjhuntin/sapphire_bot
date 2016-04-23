@@ -2,7 +2,7 @@
 
 module SapphireBot
   # The format log timestamps should be in, in strftime format
-  LOG_TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M:%S'.freeze
+  LOG_TIMESTAMP_FORMAT = '%Y-%m-%d-%H:%M:%S'.freeze
 
   # Logs debug messages
   class Logger
