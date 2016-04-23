@@ -21,15 +21,15 @@ module SapphireBot
     puts "Enter your google api key "
     config[:googl_api] = gets.chomp
 
-    puts 'Enter owner id. Enter for default (109268519115329536)'
+    puts 'Enter owner id. Press enter for default (109268519115329536)'
     config[:owner_id] = gets.chomp
     config[:owner_id] = 109268519115329536 if config[:owner_id].empty?
 
-    puts 'Enter your prefix. Enter for default ("!")'
+    puts 'Enter your prefix. Press enter for default ("!")'
     config[:prefix] = gets.chomp
     config[:prefix] = "!" if config[:prefix].empty?
 
-    puts 'Enter your permissions code. Enter for default (66321471)'
+    puts 'Enter your permissions code. Press enter for default (66321471)'
     config[:permissions_code] = gets.chomp
     config[:permissions_code] = 66321471 if config[:permissions_code].empty?
 
