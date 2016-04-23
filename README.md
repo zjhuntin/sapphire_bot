@@ -47,7 +47,7 @@ Commands start with a prefix, which is `!` by default.
 
 * Debugging
 
-  * `eval <code>` evaluates Ruby expression(s) (user needs to be owner of the bot).
+  * `eval <code>` evaluates Ruby expression(s) (user needs to be owner of the bot). **USE WITH EXTREME CAUTION**
 
 
 ### Support
@@ -61,7 +61,7 @@ You can find me (@PoVa, ID109268519115329536) on this server: https://discord.gg
 * Per-server configuration
 * Translations
 
-### Installation
+### Installing and running
 Make sure you have `git` and `bundler` installed, then
 
    `$ git clone https://github.com/PoVa/sapphire_bot.git`
@@ -70,23 +70,15 @@ If you don't wish to contribute to this repositry, add `--without development` t
 
    `$ bundle install`
 
+Run the bot.
+
+   `$ ./sapphire_bot`
+
+After you've done with configuration, invite url should pop up, use it to make the bot join your server.
+
 ### Updating
 
   `$ git pull`
-
-### Configuration
-
-1. Rename `example.config.rb` to `config.rb`, then fill in the variables:
-
-   `$ mv example.config.rb config.rb && nano config.rb`
-
-   You can change nano to your favorite text editor.
-
-3. Run the bot:
-
-   `$ ./run`
-
-4. If everything goes well you should see link in your console, use it to make the bot join your server.
 
 ### Contributing
 

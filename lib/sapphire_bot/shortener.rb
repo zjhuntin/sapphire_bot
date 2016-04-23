@@ -3,7 +3,7 @@ require 'google_url_shortener'
 module SapphireBot
   class Shortener
     def initialize
-      Google::UrlShortener::Base.api_key = GOOGLE_API
+      Google::UrlShortener::Base.api_key = CONFIG[:googl_api]
       LOGGER.info 'google url shortener authorized'
     rescue => e
       LOGGER.log_exception e

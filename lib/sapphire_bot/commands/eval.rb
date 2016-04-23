@@ -6,7 +6,7 @@ module SapphireBot
       extend Discordrb::Commands::CommandContainer
       command(:eval, bucket: :default, min_args: 1, usage: 'eval <code>',
                      description: 'Evaluates Ruby expression(s)') do |event, *code|
-        if event.author.id == OWNER_ID
+        if event.author.id == CONFIG[:owner_id]
           code = code.join(' ').to_s
           begin
             event << eval(code)

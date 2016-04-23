@@ -3,7 +3,7 @@ module SapphireBot
     module Message
       module MessagesCounter
         extend Discordrb::EventContainer
-        message(starting_with: not!(PREFIX),
+        message(starting_with: not!(CONFIG[:prefix]),
                 private: false) do |event|
           STATS.messages_counter += 1 unless event.author.current_bot?
         end
@@ -11,7 +11,7 @@ module SapphireBot
       module AutoShorten
         extend ShortenText
         extend Discordrb::EventContainer
-        message(starting_with: not!(PREFIX),
+        message(starting_with: not!(CONFIG[:prefix]),
                 private: false) do |event|
           unless event.from_bot?
             if event.bot.profile.on(event.server).permission?(:manage_messages,

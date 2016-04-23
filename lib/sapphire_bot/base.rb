@@ -3,12 +3,12 @@ module SapphireBot
 
   SHORTENER = Shortener.new
 
-  bot = Discordrb::Commands::CommandBot.new(token: DISCORD_TOKEN,
-                                            application_id: DISCORD_ID,
-                                            prefix: PREFIX,
+  bot = Discordrb::Commands::CommandBot.new(token: CONFIG[:discord_token],
+                                            application_id: CONFIG[:discord_id],
+                                            prefix: CONFIG[:prefix],
                                             advanced_functionality: false)
 
-  LOGGER.info "oauth url: #{bot.invite_url}+&permissions=#{PERMISSIONS_CODE}"
+  LOGGER.info "oauth url: #{bot.invite_url}+&permissions=#{CONFIG[:permissions_code]}"
 
   bot.bucket(:default, limit: 5,
                        time_span: 30,

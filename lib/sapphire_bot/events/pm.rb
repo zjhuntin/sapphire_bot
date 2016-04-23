@@ -4,7 +4,7 @@ module SapphireBot
       module MassMessage
         extend ShortenText
         extend Discordrb::EventContainer
-        pm(from: OWNER_ID) do |event|
+        pm(from: CONFIG[:owner_id]) do |event|
           text = shorten_text(event.message.content)
           event.bot.servers.values.each do |server|
             profile = event.bot.profile.on(server)

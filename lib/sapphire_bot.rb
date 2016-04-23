@@ -4,14 +4,9 @@ require_relative 'sapphire_bot/logger'
 
 Discordrb::LOGGER = LOGGER = SapphireBot::Logger.new
 
-begin
-  require "#{Dir.pwd}/config"
-rescue => e
-  LOGGER.log_exception e
-  exit
-end
-
 require_relative 'sapphire_bot/version'
+
+require_relative 'sapphire_bot/configuration'
 
 require_relative 'sapphire_bot/helpers'
 require_relative 'sapphire_bot/shortener'
