@@ -10,6 +10,8 @@ Metrics/LineLength:
   Enabled: false
 Metrics/PerceivedComplexity:
   Enabled: false
+Lint/Eval:
+  Enabled: false
 
 AllCops:
   Exclude:

@@ -61,7 +61,7 @@ module SapphireBot
     # Logs an exception to the console.
     # @param e [Exception] The exception to log.
     def log_exception(e)
-      error("Exception: #{e.inspect}")
+      error(e.inspect)
       e.backtrace.each { |line| error(line) }
     end
 

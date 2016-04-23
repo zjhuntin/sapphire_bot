@@ -26,6 +26,7 @@ module SapphireBot
   bot.include! Commands::Leave
   bot.include! Commands::About
   bot.include! Commands::Avatar
+  bot.include! Commands::Eval
   bot.include! Events::Mention
   bot.include! Events::Message::MessagesCounter
   bot.include! Events::Message::AutoShorten

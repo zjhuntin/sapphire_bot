@@ -11,7 +11,7 @@ module SapphireBot
             event.bot.profile.avatar = open(url)
             event << 'Avatar set.'
           else
-            event << 'Only bot owner can use this message'
+            event << 'Only bot owner can use this message.'
           end
         else
           event << 'Invalid url.'

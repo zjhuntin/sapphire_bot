@@ -13,13 +13,14 @@ module SapphireBot
         extend Discordrb::EventContainer
         message(starting_with: not!(PREFIX),
                 private: false) do |event|
-          if  !event.from_bot? &&
-              event.bot.profile.on(event.server).permission?(:manage_messages,
-                                                             event.channel)
-            text = shorten_text(event.message.content)
-            if event.message.content != text
-              event.send_message("**#{event.author.username}**: #{text}")
-              event.message.delete
+          unless event.from_bot?
+            if event.bot.profile.on(event.server).permission?(:manage_messages,
+                                                              event.channel)
+              text = shorten_text(event.message.content)
+              if event.message.content != text
+                event.send_message("**#{event.author.username}**: #{text}")
+                event.message.delete
+              end
             end
           end
         end
