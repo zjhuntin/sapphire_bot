@@ -16,6 +16,4 @@ Lint/Eval:
 AllCops:
   Exclude:
     - 'data/*'
-    - 'config.rb'
-    - 'example.config.rb'
-    - 'sapphire_bot.gemspec'
+    - 'lib/sapphire_bot/configuration.rb'

@@ -11,14 +11,14 @@ module SapphireBot
       LOGGER.log_exeption e
     end
   else
-    puts "There is no config file, running the setup"
-    puts "Enter your discord token "
+    puts 'There is no config file, running the setup'
+    puts 'Enter your discord token '
     config[:discord_token] = gets.chomp
 
-    puts "Enter your discord id "
+    puts 'Enter your discord id '
     config[:discord_id] = gets.chomp
 
-    puts "Enter your google api key "
+    puts 'Enter your google api key '
     config[:googl_api] = gets.chomp
 
     puts 'Enter owner id. Press enter for default (109268519115329536)'
@@ -27,7 +27,7 @@ module SapphireBot
 
     puts 'Enter your prefix. Press enter for default ("!")'
     config[:prefix] = gets.chomp
-    config[:prefix] = "!" if config[:prefix].empty?
+    config[:prefix] = '!' if config[:prefix].empty?
 
     puts 'Enter your permissions code. Press enter for default (66321471)'
     config[:permissions_code] = gets.chomp
