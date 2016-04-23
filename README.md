@@ -8,7 +8,7 @@ A simple bot for discord made with [discordrb](https://github.com/meew0/discordr
 ### Features
 
 * Automatic link shortening with https://goo.gl/. Whenever a link within a message is detected, the message gets replaced and all its links shortened. Example:
-*
+
   `PoVa: look at his dank maymay m8: http://img.ifcdn.com/images/a52e08ff36a62190f8259a6b5e9aa2f9f9a86bb841bc6b01aa6cbacc7bbe846f_1.jpg`
 
   (Original message deleted)
