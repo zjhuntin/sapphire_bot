@@ -15,7 +15,7 @@ A simple bot for discord made with [discordrb](https://github.com/meew0/discordr
 
   `Sapphire: PoVa: look at his dank maymay m8: http://goo.gl/U7GO0D`
 
-  This feature is disabled by default, but you can enable it with the following command: `shortening <on/off>`.
+  This feature is disabled by default, but you can enable it with the following command: `shortening <on/off>`. You can find ignored urls here.
 
 * Owner of the bot can send mass message to all servers by sending the bot a private message.
 
