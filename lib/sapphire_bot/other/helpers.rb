@@ -13,6 +13,11 @@ module SapphireBot
       string << " #{minutes} minute#{'s' unless minutes == 1}"
     end
 
+    def bool_to_words(bool)
+      return 'enabled' if bool
+      'disabled'
+    end
+
     def valid_url?(url)
       url =~ /\A#{URI.regexp}\z/
     end

@@ -24,6 +24,7 @@ module SapphireBot
   bot.include! Commands::Avatar
   bot.include! Commands::Eval
   bot.include! Commands::Shortening
+  bot.include! Commands::Settings
   bot.include! Events::Mention
   bot.include! Events::Message::MessagesReadStat
   bot.include! Events::Message::AutoShorten

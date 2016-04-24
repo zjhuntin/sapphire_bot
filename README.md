@@ -15,7 +15,7 @@ A simple bot for discord made with [discordrb](https://github.com/meew0/discordr
 
   `Sapphire: PoVa: look at his dank maymay m8: http://goo.gl/U7GO0D`
 
-  For now, to avoid shortening add `.` or any other symbol in front of the link (I'll add something better later).
+  This feature is disabled by default, but you can enable it with the following command: `shortening <on/off>`.
 
 * Owner of the bot can send mass message to all servers by sending the bot a private message.
 
@@ -28,10 +28,11 @@ Commands start with a prefix, which is `!` by default.
   * `help <command>` displays help for a specific command.
   * `about` shows information about this bot.
   * `stats` displays bot statistics.
-  * `ping` responds with respond time.
-  * `invite` shows information about inviting this bot to your sever.
+  * `ping` shows with respond time.
+  * `invite` displays information about inviting this bot to your sever.
   * `leave` makes the bot leave this server (user needs to have kick members permission).
   * `avatar <url>` sets avatar of this bot (user needs to be owner of the bot).
+  * `settings` displays current server settings.
 
 * Fun:
 
