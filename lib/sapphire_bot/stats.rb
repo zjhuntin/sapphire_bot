@@ -11,7 +11,7 @@ module SapphireBot
       @stats_hash[:mentions] = 0
       temp = load_file(@file)
       @stats_hash = temp if temp
-      @stats_hash[:start_time] = Time.now.to_i
+      @start_time = Time.now.to_i
     end
 
     def update(bot)
@@ -45,7 +45,7 @@ module SapphireBot
     end
 
     def uptime
-      @stats_hash[:uptime] = (Time.now - @stats_hash[:start_time]).to_i
+      @stats_hash[:uptime] = (Time.now - @start_time).to_i
     end
 
     def inspect
