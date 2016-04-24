@@ -8,7 +8,7 @@ module SapphireBot
         if event.author.permission?(:manage_server, event.channel)
           if option == 'on'
             event.bot.server_config.update(event.server.id, :auto_shorten, true)
-            event << 'From now on, I will automaticlly shorten links.'
+            event << 'From now on, I will automatically shorten links.'
           elsif option == 'off'
             event.bot.server_config.update(event.server.id, :auto_shorten, false)
             event << 'Automatic link shortening is now off.'
