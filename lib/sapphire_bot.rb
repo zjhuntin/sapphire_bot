@@ -6,7 +6,7 @@ Discordrb::LOGGER = LOGGER = SapphireBot::Logger.new
 
 require_relative 'sapphire_bot/version'
 
-require_relative 'sapphire_bot/configuration'
+require_relative 'sapphire_bot/config'
 
 require_relative 'sapphire_bot/helpers'
 require_relative 'sapphire_bot/shortener'
