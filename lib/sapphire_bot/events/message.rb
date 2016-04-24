@@ -5,7 +5,7 @@ module SapphireBot
         extend Discordrb::EventContainer
         message(starting_with: not!(CONFIG[:prefix]),
                 private: false) do |event|
-          event.bot.stats.messages_counter += 1 unless event.author.current_bot?
+          event.bot.stats.stats_hash[:messages_read] += 1 unless event.author.current_bot?
         end
       end
       module AutoShorten

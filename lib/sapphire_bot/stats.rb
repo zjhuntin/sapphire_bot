@@ -1,58 +1,56 @@
 module SapphireBot
   class Stats
-    attr_accessor   :servers_count, :users_count, :unique_users, :start_time,
-                    :unique_users_count, :mentions, :start_time,
-                    :urls_shortened, :messages_counter
+    include SapphireBot::StoreData
+    attr_accessor :stats_hash
     def initialize
-      @file_path = "#{Dir.pwd}/data/stats"
-      @urls_shortened = 0
-      @messages_counter = 0
-      @mentions = 0
-      @unique_users = []
-      @start_time = Time.now
-      load
+      @file = "#{Dir.pwd}/data/stats.yml"
+      @stats_hash = {}
+      @stats_hash[:urls_shortened] = 0
+      @stats_hash[:messages_read] = 0
+      @stats_hash[:urls_shortened] = 0
+      @stats_hash[:mentions] = 0
+      temp = load_file(@file)
+      @stats_hash = temp if temp
+      @stats_hash[:start_time] = Time.now.to_i
     end
 
     def update(bot)
-      @servers_count = bot.servers.count
-      @users_count = 0
+      @stats_hash[:servers] = bot.servers.size
+      @stats_hash[:users] = 0
 
       bot.servers.values.each do |server|
-        server.members.each do |member|
-          @users_count += 1
-          @unique_users.push(member.id) unless @unique_users.include?(member.id)
-        end
+        @stats_hash[:users] += server.members.size
       end
-      @unique_users_count = @unique_users.length
-      save
+      save_to_file(@file, @stats_hash)
+    end
+
+    def urls_shortened
+      @stats_hash[:urls_shortened]
+    end
+
+    def messages_read
+      @stats_hash[:messages_read]
+    end
+
+    def mentions
+      @stats_hash[:mentions]
+    end
+
+    def servers
+      @stats_hash[:servers]
+    end
+
+    def users
+      @stats_hash[:users]
+    end
+
+    def uptime
+      @stats_hash[:uptime] = (Time.now - @stats_hash[:start_time]).to_i
     end
 
     def inspect
-      LOGGER.info "servers: #{@servers_count} users: #{@users_count}"
-    end
-
-    private
-
-    def load
-      if File.exist?(@file_path)
-        begin
-          Marshal.load(File.binread(@file_path))
-          LOGGER.info 'loaded stats from file'
-        rescue => e
-          LOGGER.log_exception e
-        end
-      else
-        LOGGER.info 'no stats file'
-      end
-      @start_time = Time.now
-    end
-
-    def save
-      File.open(@file_path, 'w') do |f|
-        f.write(Marshal.dump(self))
-      end
-    rescue => e
-      LOGGER.log_exception e
+      puts ''
+      @stats_hash.each { |key, value| LOGGER.info "#{key}: #{value} " unless key == :start_time }
     end
   end
 end

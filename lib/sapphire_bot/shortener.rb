@@ -10,7 +10,7 @@ module SapphireBot
     end
 
     def shorten(url, bot)
-      bot.stats.urls_shortened += 1
+      bot.stats.stats_hash[:urls_shortened] += 1
       Google::UrlShortener.shorten!(url)
     end
   end

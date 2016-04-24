@@ -1,8 +1,8 @@
 module SapphireBot
   bot = Bot.new(token: CONFIG[:discord_token],
-                        application_id: CONFIG[:discord_id],
-                        prefix: CONFIG[:prefix],
-                        advanced_functionality: false)
+                application_id: CONFIG[:discord_id],
+                prefix: CONFIG[:prefix],
+                advanced_functionality: false)
 
   LOGGER.info "oauth url: #{bot.invite_url}+&permissions=#{CONFIG[:permissions_code]}"
 

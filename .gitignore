@@ -9,6 +9,6 @@
 /tmp/
 
 config.yml
-data/stats
+data/stats.yml
 data/server_config.yml
 logs/*.log

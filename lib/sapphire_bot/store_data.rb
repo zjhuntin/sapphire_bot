@@ -5,6 +5,7 @@ module SapphireBot
         f.write YAML.dump(object)
       end
     end
+
     def load_file(file)
       return YAML.load_file(file) if File.exist?(file)
       nil

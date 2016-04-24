@@ -16,4 +16,4 @@ Lint/Eval:
 AllCops:
   Exclude:
     - 'data/*'
-    - 'lib/sapphire_bot/configuration.rb'
+    - 'lib/sapphire_bot/config.rb'

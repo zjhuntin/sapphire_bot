@@ -1,5 +1,3 @@
-require 'yaml'
-
 module SapphireBot
   class ServerConfig
     include SapphireBot::StoreData
@@ -16,7 +14,7 @@ module SapphireBot
     end
 
     def create(id)
-      @servers.push({id: id, auto_shorten: false})
+      @servers.push(id: id, auto_shorten: false)
       save_to_file(@file, @servers)
       LOGGER.info "Created a new config entry for server #{id}."
     end

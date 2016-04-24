@@ -7,13 +7,12 @@ module SapphireBot
                       description: 'Shows bot statistics') do |event|
         ping = ((Time.now - event.timestamp) * 1000).to_i
         event << ''
-        event << "Servers: #{event.bot.stats.servers_count}."
-        event << "Users: #{event.bot.stats.users_count}."
-        event << "Unique users:  #{event.bot.stats.unique_users_count}."
+        event << "Servers: #{event.bot.stats.servers}."
+        event << "Users: #{event.bot.stats.users}."
         event << "Times mentioned: #{event.bot.stats.mentions}."
-        event << "Uptime: #{time_in_words(Time.now - event.bot.stats.start_time)}."
+        event << "Uptime: #{time_in_words(event.bot.stats.uptime)}."
         event << "Urls shortened: #{event.bot.stats.urls_shortened}."
-        event << "Messages read: #{event.bot.stats.messages_counter}."
+        event << "Messages read: #{event.bot.stats.messages_read}."
         event << "Ping: #{ping}ms."
       end
     end

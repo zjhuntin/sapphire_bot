@@ -1,4 +1,5 @@
 require 'discordrb'
+require 'yaml'
 
 require_relative 'sapphire_bot/logger'
 
