@@ -1,6 +1,6 @@
 module SapphireBot
   class Stats
-    include SapphireBot::StoreData
+    include StoreData
     attr_accessor :stats_hash
     def initialize
       @file = "#{Dir.pwd}/data/stats.yml"

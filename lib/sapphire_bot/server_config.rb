@@ -1,6 +1,6 @@
 module SapphireBot
   class ServerConfig
-    include SapphireBot::StoreData
+    include StoreData
     def initialize
       @file = "#{Dir.pwd}/data/server_config.yml"
       @servers = load_file(@file)

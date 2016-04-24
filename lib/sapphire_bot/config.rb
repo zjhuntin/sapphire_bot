@@ -1,16 +1,13 @@
 require 'yaml'
 
 module SapphireBot
-  file = "#{Dir.pwd}/config.yml"
-  config = {}
+  extend StoreData
+  file = "#{Dir.pwd}/data/config.yml"
+  temp = load_file(file)
+  CONFIG = temp if temp
+  unless defined?(CONFIG)
+    config = {}
 
-  if File.exist?(file)
-    begin
-      config = YAML.load_file(file)
-    rescue => e
-      LOGGER.log_exeption e
-    end
-  else
     puts 'There is no config file, running the setup'
     puts 'Enter your discord token '
     config[:discord_token] = gets.chomp
@@ -33,9 +30,7 @@ module SapphireBot
     config[:permissions_code] = gets.chomp
     config[:permissions_code] = 66321471 if config[:permissions_code].empty?
 
-    File.open(file, 'w') do |f|
-      f.write config.to_yaml
-    end
+    save_to_file(file, config)
+    CONFIG = config
   end
-  CONFIG = config
 end
