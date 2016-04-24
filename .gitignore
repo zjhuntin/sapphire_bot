@@ -8,5 +8,7 @@
 /spec/reports/
 /tmp/
 
-data/*.yml
+data/config.yml
+data/server_config.yml
+data/stats.yml
 logs/*.log
