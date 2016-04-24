@@ -10,4 +10,5 @@
 
 config.yml
 data/stats
+data/server_config.yml
 logs/*.log

@@ -4,7 +4,7 @@ module SapphireBot
       extend Discordrb::EventContainer
       mention do |event|
         event.respond("Sapphire v#{VERSION} live and ready!")
-        STATS.mentions += 1
+        event.bot.stats.mentions += 1
       end
     end
   end

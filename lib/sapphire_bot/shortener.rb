@@ -9,8 +9,8 @@ module SapphireBot
       LOGGER.log_exception e
     end
 
-    def shorten(url)
-      STATS.urls_shortened += 1
+    def shorten(url, bot)
+      bot.stats.urls_shortened += 1
       Google::UrlShortener.shorten!(url)
     end
   end

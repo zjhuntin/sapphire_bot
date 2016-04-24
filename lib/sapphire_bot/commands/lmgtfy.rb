@@ -8,7 +8,7 @@ module SapphireBot
         event.message.delete if event.bot.profile.on(event.server)
                                      .permission?(:manage_messages,
                                                   event.channel)
-        SHORTENER.shorten("http://lmgtfy.com/?q=#{text.join('+')}")
+        event.bot.shortener.shorten("http://lmgtfy.com/?q=#{text.join('+')}", event.bot)
       end
     end
   end
