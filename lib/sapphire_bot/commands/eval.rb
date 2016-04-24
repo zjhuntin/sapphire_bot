@@ -1,5 +1,3 @@
-require 'open-uri'
-
 module SapphireBot
   module Commands
     module Eval

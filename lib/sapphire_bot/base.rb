@@ -23,10 +23,12 @@ module SapphireBot
   bot.include! Commands::About
   bot.include! Commands::Avatar
   bot.include! Commands::Eval
+  bot.include! Commands::Shortening
   bot.include! Events::Mention
-  bot.include! Events::Message::MessagesCounter
+  bot.include! Events::Message::MessagesReadStat
   bot.include! Events::Message::AutoShorten
   bot.include! Events::Pm::MassMessage
+  bot.include! Events::ServerCreate::ConfigureServer
 
   bot.run :async
 

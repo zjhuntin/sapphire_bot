@@ -7,16 +7,12 @@ module SapphireBot
       @servers = [] unless @servers
     end
 
-    def find_server(id)
-      @servers.find do |server|
-        server[:id] == id
-      end
-    end
-
     def create(id)
-      @servers.push(id: id, auto_shorten: false)
-      save_to_file(@file, @servers)
-      LOGGER.info "Created a new config entry for server #{id}."
+      unless exists?(id)
+        @servers.push(id: id, auto_shorten: false)
+        save_to_file(@file, @servers)
+        LOGGER.info "created a new config entry for server #{id}."
+      end
     end
 
     def update(id, setting, value)
@@ -26,6 +22,17 @@ module SapphireBot
 
     def auto_shorten?(id)
       find_server(id)[:auto_shorten]
+    end
+
+    private
+
+    def find_server(id)
+      @servers.find { |server| server[:id] == id }
+    end
+
+    def exists?(id)
+      return true if @servers.find { |server| server[:id] == id }
+      false
     end
   end
 end

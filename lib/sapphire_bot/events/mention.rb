@@ -3,7 +3,12 @@ module SapphireBot
     module Mention
       extend Discordrb::EventContainer
       mention do |event|
-        event.respond("Sapphire v#{VERSION} live and ready!")
+        string = if event.bot.server_config.auto_shorten?(event.server.id)
+                   'enabled'
+                 else
+                   'disabled'
+                 end
+        event.respond("Sapphire v#{VERSION} live and ready! Automatic link shortening is #{string}.")
         event.bot.stats.stats_hash[:mentions] += 1
       end
     end
