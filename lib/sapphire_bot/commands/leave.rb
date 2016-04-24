@@ -6,7 +6,7 @@ module SapphireBot
                       description: 'Makes the bot leave this server.') do |event|
         if event.author.owner? ||
            event.author.permission?(:kick_members, event.server)
-          event event << 'See you. Meanwhile, take a look: <https://goo.gl/sSDDjp>'
+          event << 'See you. Meanwhile, take a look: <https://goo.gl/sSDDjp>'
           event.server.leave
         else
           event << `You need kick members permission to use this.`
