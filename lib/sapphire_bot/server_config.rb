@@ -24,7 +24,7 @@ module SapphireBot
       find_server(id)[:auto_shorten]
     end
 
-    def exists?(id)
+    def server_exists?(id)
       return true if @servers.find { |server| server[:id] == id }
       false
     end
