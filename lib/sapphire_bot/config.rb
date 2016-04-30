@@ -12,10 +12,10 @@ module SapphireBot
     puts 'Enter your discord token '
     config[:discord_token] = gets.chomp
 
-    puts 'Enter your discord id '
+    puts 'Enter your discord client/application ID'
     config[:discord_id] = gets.chomp
 
-    puts 'Enter your google api key '
+    puts 'Enter your google api key'
     config[:googl_api] = gets.chomp
 
     puts 'Enter owner id. Press enter for default (109268519115329536)'
