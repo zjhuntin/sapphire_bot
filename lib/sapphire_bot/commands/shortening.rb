@@ -7,10 +7,10 @@ module SapphireBot
                            required_permissions: [:manage_server],
                            bucket: :default, min_args: 1) do |event, option|
         if option == 'on'
-          event.server.update_config(shortening: true)
+          event.server.update_config(shortening: {value: true})
           event << 'From now on, I will automatically shorten links.'
         elsif option == 'off'
-          event.server.update_config(shortening: false)
+          event.server.update_config(shortening: {value: false})
           event << 'Automatic link shortening is now off.'
         else
           event << 'Unknown option, use on or off.'

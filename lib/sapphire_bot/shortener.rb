@@ -12,22 +12,27 @@ module SapphireBot
       LOGGER.log_exception e
     end
 
-    def shorten_text(text, bot)
+    def shorten_text(event, text = '')
+      text = event.message.content if event.is_a?(Discordrb::Events::MessageEvent)
       return text if text.length <= 21
       if text.include?(' ') || text.include?("\n")
         return text.lines.map do |line|
           line.split(' ').map do |word|
-            bot.shortener.shorten(word, bot)
+            shorten(word, event)
           end.join(' ')
         end.join("\n")
       end
-      bot.shortener.shorten(text, bot)
+      shorten(text, event)
     end
 
-    def shorten(url, bot)
-      bot.stats.stats_hash[:urls_shortened] += 1
+    def shorten(url, event)
       if valid_url?(url) && !@ignored_urls.any? { |ignored_url| url.include?(ignored_url) }
-        return Google::UrlShortener.shorten!(url)
+        event.bot.stats.stats_hash[:urls_shortened] += 1
+        if event.server.preview?
+          return Google::UrlShortener.shorten!(url)
+        else
+          return "<#{Google::UrlShortener.shorten!(url)}>"
+        end
       end
       url
     end
