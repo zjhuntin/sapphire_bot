@@ -10,6 +10,7 @@ module SapphireBot
 
     def load_file(file)
       return YAML.load_file(file) if File.exist?(file)
+      {}
     end
   end
 end

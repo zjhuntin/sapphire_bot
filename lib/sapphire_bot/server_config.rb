@@ -4,15 +4,16 @@ module SapphireBot
 
     @file = "#{Dir.pwd}/data/server_config.yml"
     @default_config = { shortening: false }
-    @servers = {}
+    @servers = load_file(@file)
 
     def self.load_config(id)
-      config = load_file(@file)
-      unless config
-        config = @default_config.clone
+      if @servers.key?(id)
+        config = @servers[id]
+      else
         LOGGER.info "created a new config entry for server #{id}."
+        config = @default_config.clone
+        @servers[id] = config
       end
-      @servers[id] = config
       config
     end
 
