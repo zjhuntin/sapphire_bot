@@ -14,7 +14,6 @@ module SapphireBot
         config = @default_config.clone
         @servers[id] = config
       end
-      config
     end
 
     def self.update_servers(config, id)
