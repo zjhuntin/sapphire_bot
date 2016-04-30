@@ -1,7 +1,9 @@
 module SapphireBot
   class Stats
     include StoreData
+
     attr_accessor :stats_hash
+    
     def initialize
       @file = "#{Dir.pwd}/data/stats.yml"
       @stats_hash = {}
@@ -45,7 +47,7 @@ module SapphireBot
     end
 
     def uptime
-      @stats_hash[:uptime] = (Time.now - @start_time).to_i
+      Time.now - @start_time
     end
 
     def inspect
