@@ -13,9 +13,8 @@ module SapphireBot
     end
 
     def shorten_text(text, bot)
-      if text.length <= 21
-        return text
-      elsif text.include?(' ') || text.include?("\n")
+      return text if text.length <= 21
+      if text.include?(' ') || text.include?("\n")
         return text.lines.map do |line|
           line.split(' ').map do |word|
             bot.shortener.shorten(word, bot)
