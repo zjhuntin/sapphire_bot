@@ -8,11 +8,9 @@ module SapphireBot
     end
 
     def create(id)
-      unless exists?(id)
-        @servers.push(id: id, auto_shorten: false)
-        save_to_file(@file, @servers)
-        LOGGER.info "created a new config entry for server #{id}."
-      end
+      @servers.push(id: id, auto_shorten: false)
+      save_to_file(@file, @servers)
+      LOGGER.info "created a new config entry for server #{id}."
     end
 
     def update(id, setting, value)

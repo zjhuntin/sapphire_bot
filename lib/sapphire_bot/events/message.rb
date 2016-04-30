@@ -9,14 +9,13 @@ module SapphireBot
         end
       end
       module AutoShorten
-        extend ShortenText
         extend Discordrb::EventContainer
         message(starting_with: not!(CONFIG[:prefix]),
                 private: false) do |event|
           unless event.from_bot?
             if event.bot.profile.on(event.server).permission?(:manage_messages, event.channel) &&
                event.bot.server_config.auto_shorten?(event.server.id)
-              text = shorten_text(event.message.content, event.bot)
+              text = event.bot.shortener.shorten_text(event.message.content, event.bot)
               if event.message.content != text
                 event.send_message("**#{event.author.username}**: #{text}")
                 event.message.delete

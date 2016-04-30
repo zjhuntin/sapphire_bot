@@ -1,7 +1,6 @@
 module SapphireBot
   module Commands
     module Announce
-      extend ShortenText
       extend Discordrb::Commands::CommandContainer
       command(:announce, description: 'Announces your text server-wide.',
                          bucket: :default, min_args: 1,
@@ -10,7 +9,7 @@ module SapphireBot
           event.message.delete if event.bot.profile.on(event.server)
                                        .permission?(:manage_messages,
                                                     event.channel)
-          text = shorten_text(text.join(' '), event.bot)
+          text = event.bot.shortener.shorten_text(text.join(' '), event.bot)
           event.server.text_channels.each do |channel|
             profile = event.bot.profile.on(event.server)
             next unless profile.permission?(:send_messages, channel)
