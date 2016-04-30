@@ -1,3 +1,5 @@
+require 'yaml'
+
 module SapphireBot
   module StoreData
     def save_to_file(file, object)
@@ -8,7 +10,6 @@ module SapphireBot
 
     def load_file(file)
       return YAML.load_file(file) if File.exist?(file)
-      nil
     end
   end
 end

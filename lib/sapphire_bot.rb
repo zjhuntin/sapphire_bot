@@ -1,5 +1,4 @@
 require 'discordrb'
-require 'yaml'
 
 require_relative 'sapphire_bot/logger'
 
@@ -14,7 +13,9 @@ require_relative 'sapphire_bot/server_config'
 
 require_relative 'sapphire_bot/shortener'
 require_relative 'sapphire_bot/stats'
-require_relative 'sapphire_bot/bot'
+
+require_relative 'sapphire_bot/discordrb/bot'
+require_relative 'sapphire_bot/discordrb/server'
 
 Dir["#{File.dirname(__FILE__)}/sapphire_bot/commands/*.rb"].each { |file| require file }
 Dir["#{File.dirname(__FILE__)}/sapphire_bot/events/*.rb"].each { |file| require file }

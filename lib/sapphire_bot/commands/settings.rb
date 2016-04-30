@@ -5,7 +5,7 @@ module SapphireBot
       extend Discordrb::Commands::CommandContainer
       command(:settings, description: 'Displays current server settings.',
                          bucket: :default) do |event|
-        event << "Automatic link shortening: #{bool_to_words(event.bot.server_config.shortening?(event.server.id))}."
+        event << "Automatic link shortening: #{bool_to_words(event.server.shortening?)}."
       end
     end
   end

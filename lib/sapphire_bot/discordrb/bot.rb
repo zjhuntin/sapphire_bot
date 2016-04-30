@@ -4,7 +4,6 @@ module SapphireBot
     def initialize(attributes = {})
       super(attributes)
       @stats = Stats.new
-      @server_config = ServerConfig.new
       @shortener = Shortener.new
     end
   end

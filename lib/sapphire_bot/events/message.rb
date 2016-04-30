@@ -14,7 +14,7 @@ module SapphireBot
                 private: false) do |event|
           unless event.from_bot?
             if event.bot.profile.on(event.server).permission?(:manage_messages, event.channel) &&
-               event.bot.server_config.shortening?(event.server.id)
+               event.server.shortening?
               text = event.bot.shortener.shorten_text(event.message.content, event.bot)
               if event.message.content != text
                 event.send_message("**#{event.author.username}**: #{text}")

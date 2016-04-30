@@ -29,13 +29,14 @@ module SapphireBot
   bot.include! Events::Message::MessagesReadStat
   bot.include! Events::Message::AutoShorten
   bot.include! Events::Pm::MassMessage
-  bot.include! Events::ServerCreate::ConfigureServer
 
   bot.run :async
 
   loop do
     bot.stats.update(bot)
+    bot.stats.save
     bot.stats.inspect
+    ServerConfig.save
     sleep(60)
   end
 end
