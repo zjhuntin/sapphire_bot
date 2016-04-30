@@ -3,14 +3,10 @@ module SapphireBot
     module Leave
       extend Discordrb::Commands::CommandContainer
       command(:leave, bucket: :default,
+                      required_permissions: [:manage_server],
                       description: 'Makes the bot leave this server.') do |event|
-        if event.author.owner? ||
-           event.author.permission?(:kick_members, event.server)
-          event << 'See you. Meanwhile, take a look: <https://goo.gl/sSDDjp>'
-          event.server.leave
-        else
-          event << `You need kick members permission to use this.`
-        end
+        event << 'See you. Meanwhile, take a look: <https://goo.gl/sSDDjp>'
+        event.server.leave
       end
     end
   end

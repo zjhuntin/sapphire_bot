@@ -30,7 +30,7 @@ Commands start with a prefix, which is `!` by default.
   * `stats` displays bot statistics.
   * `ping` shows with respond time.
   * `invite` displays information about inviting this bot to your sever.
-  * `leave` makes the bot leave this server (user needs to have kick members permission).
+  * `leave` makes the bot leave this server (user needs to have manage server permission).
   * `avatar <url>` sets avatar of this bot (user needs to be owner of the bot).
   * `settings` displays current server settings.
 

@@ -46,13 +46,9 @@ module SapphireBot
       @stats_hash[:mentions]
     end
 
-    def servers
-      @servers
-    end
+    attr_reader :servers
 
-    def users
-      @users
-    end
+    attr_reader :users
 
     def uptime
       (Time.now - @start_time).to_i
@@ -62,7 +58,7 @@ module SapphireBot
       LOGGER.info "users: #{@users}"
       LOGGER.info "servers: #{@servers}"
       LOGGER.info "uptime: #{uptime}"
-      @stats_hash.each { |key, value| LOGGER.info "#{key}: #{value} "}
+      @stats_hash.each { |key, value| LOGGER.info "#{key}: #{value} " }
     end
   end
 end
