@@ -53,7 +53,7 @@ Commands start with a prefix, which is `!` by default.
 * Debugging and owner only commands:
 
   * `eval <code>` evaluates Ruby expression(s). **USE WITH EXTREME CAUTION**
-  * `avatar <url>` sets avatar of this bot (user needs to be owner of the bot).
+  * `avatar <url>` sets avatar of this bot.
 
 
 ### Support
