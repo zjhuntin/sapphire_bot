@@ -4,8 +4,6 @@ module SapphireBot
 
     attr_accessor :stats_hash
 
-    attr_reader :servers, :users
-
     def initialize
       @file = "#{Dir.pwd}/data/stats.yml"
 

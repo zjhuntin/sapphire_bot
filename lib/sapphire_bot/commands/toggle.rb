@@ -9,8 +9,9 @@ module SapphireBot
                        bucket: :default, min_args: 1) do |event, setting|
         setting = setting.to_sym
         if event.server.config.keys.include?(setting.to_sym)
-          event.server.update_config(setting => { value: !event.server.config[setting][:value] })
-          event << "#{event.server.config[setting][:description]} is now #{bool_to_words(event.server.config[setting][:value])}."
+          event.server.update_config({setting => !event.server.config[setting] })
+          settings = SapphireBot::ServerConfig.settings
+          event << "#{settings[setting][:description]} is now #{bool_to_words(event.server.config[setting])}."
         else
           event << 'Unknown setting.'
         end

@@ -11,24 +11,25 @@ module Discordrb
     end
 
     def update_config(attributes = {})
-      @config.deep_merge!(attributes) if attributes.is_a?(Hash)
+      @config.merge!(attributes) if attributes.is_a?(Hash)
       SapphireBot::ServerConfig.update_servers(@config, @id)
     end
 
     def table
+      settings = SapphireBot::ServerConfig.settings
       Terminal::Table.new(headings: %w(Description Value Command)) do |t|
-        @config.each do |_key, value|
-          t.add_row([value[:description], value[:value], value[:command]])
+        @config.each do |key, value|
+          t.add_row([settings[key][:description], value, settings[key][:command]])
         end
       end
     end
 
     def shortening?
-      true if @config[:shortening][:value]
+      true if @config[:shortening]
     end
 
     def preview?
-      true if @config[:preview][:value]
+      true if @config[:preview]
     end
   end
 end

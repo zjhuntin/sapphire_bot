@@ -3,8 +3,8 @@ module SapphireBot
     extend StoreData
 
     @file = "#{Dir.pwd}/data/server_config.yml"
-    @default_config = { shortening: { value: false, description: 'Automatic link shortening', command: 'toggle shortening' },
-                        preview: { value: true, description: 'Preview for shorteneed links', command: 'toggle preview' } }
+    @default_config = { shortening: false, preview: true }
+
     @servers = load_file(@file)
 
     def self.load_config(id)
@@ -19,6 +19,13 @@ module SapphireBot
 
     def self.save
       save_to_file(@file, @servers)
+    end
+
+    def self.settings
+      {
+        shortening: { description: 'Automatic link shortening', command: 'toggle shortening' },
+        preview: { description: 'Preview for shorteneed links', command: 'toggle preview' }
+      }
     end
   end
 end
