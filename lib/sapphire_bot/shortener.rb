@@ -28,11 +28,8 @@ module SapphireBot
     def shorten(url, event)
       if valid_url?(url) && !@ignored_urls.any? { |ignored_url| url.include?(ignored_url) }
         event.bot.stats.stats_hash[:urls_shortened] += 1
-        if event.server.preview?
-          return Google::UrlShortener.shorten!(url)
-        else
-          return "<#{Google::UrlShortener.shorten!(url)}>"
-        end
+        return Google::UrlShortener.shorten!(url) if event.server.preview?
+        return "<#{Google::UrlShortener.shorten!(url)}>"
       end
       url
     end

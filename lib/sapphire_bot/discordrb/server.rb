@@ -1,3 +1,5 @@
+require 'terminal-table'
+
 module Discordrb
   class Server
     attr_reader :config
@@ -9,12 +11,24 @@ module Discordrb
     end
 
     def update_config(attributes = {})
-      @config.merge!(attributes) if attributes.is_a? Hash
+      @config.deep_merge!(attributes) if attributes.is_a?(Hash)
       SapphireBot::ServerConfig.update_servers(@config, @id)
     end
 
+    def table
+      Terminal::Table.new(headings: %w(Description Value Command)) do |t|
+        @config.each do |_key, value|
+          t.add_row([value[:description], value[:value], value[:command]])
+        end
+      end
+    end
+
     def shortening?
-      true if @config[:shortening]
+      true if @config[:shortening][:value]
+    end
+
+    def preview?
+      true if @config[:preview][:value]
     end
   end
 end
