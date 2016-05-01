@@ -12,23 +12,34 @@ module SapphireBot
       LOGGER.log_exception e
     end
 
-    def shorten_text(event, text = '')
-      text = event.message.content if event.is_a?(Discordrb::Events::MessageEvent)
-      return text if text.length <= 21
+    #Can be called as shorten(event) if event is Discordrb::Events::MessageEvent or
+    #                 shorten(event.server, text)
+    def shorten(var, text = '')
+      if var.is_a?(Discordrb::Events::MessageEvent)
+        text = var.message.content
+        server = var.server
+      elsif var.is_a?(Discordrb::Server)
+        server = var
+      end
+
+      return text unless text || server || text.length > 21
+
       if text.include?(' ') || text.include?("\n")
         return text.lines.map do |line|
           line.split(' ').map do |word|
-            shorten(word, event)
+            shorten_url(server, word)
           end.join(' ')
         end.join("\n")
       end
-      shorten(text, event)
+      shorten_url(server, text)
     end
 
-    def shorten(url, event)
+    private
+
+    def shorten_url(server, url)
       if valid_url?(url) && !@ignored_urls.any? { |ignored_url| url.include?(ignored_url) }
-        event.bot.stats.stats_hash[:urls_shortened] += 1
-        return Google::UrlShortener.shorten!(url) if event.server.preview?
+        STATS.stats_hash[:urls_shortened] += 1
+        return Google::UrlShortener.shorten!(url) if server.preview?
         return "<#{Google::UrlShortener.shorten!(url)}>"
       end
       url

@@ -1,8 +1,11 @@
 module SapphireBot
-  bot = Bot.new(token: CONFIG[:discord_token],
-                application_id: CONFIG[:discord_id],
-                prefix: CONFIG[:prefix],
-                advanced_functionality: false)
+  STATS = Stats.new
+  SHORTENER = Shortener.new
+
+  bot = Discordrb::Commands::CommandBot.new(token: CONFIG[:discord_token],
+                                            application_id: CONFIG[:discord_id],
+                                            prefix: CONFIG[:prefix],
+                                            advanced_functionality: false)
 
   LOGGER.info "oauth url: #{bot.invite_url}+&permissions=#{CONFIG[:permissions_code]}"
 
@@ -33,9 +36,9 @@ module SapphireBot
   bot.run :async
 
   loop do
-    bot.stats.update(bot)
-    bot.stats.save
-    bot.stats.inspect
+    STATS.update(bot)
+    STATS.save
+    STATS.inspect
     ServerConfig.save
     sleep(60)
   end

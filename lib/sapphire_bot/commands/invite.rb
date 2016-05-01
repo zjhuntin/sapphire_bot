@@ -6,7 +6,7 @@ module SapphireBot
                        bucket: :default) do |event|
         event << 'To invite me to your server, click on the link below and select server.'
         event << 'Only users with `manage server` permission are able to invite me.'
-        event << event.bot.shortener.shorten("#{event.bot.invite_url}+&permissions=#{CONFIG[:permissions_code]}", event.bot)
+        event << SHORTENER.shorten(event.server, "#{event.bot.invite_url}+&permissions=#{CONFIG[:permissions_code]}")
       end
     end
   end
