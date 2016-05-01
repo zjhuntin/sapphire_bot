@@ -1,9 +1,9 @@
 module SapphireBot
   extend StoreData
-  
+
   file = "#{Dir.pwd}/data/config.yml"
   temp = load_file(file)
-  CONFIG = temp if temp
+  CONFIG = temp unless temp.empty?
   unless defined?(CONFIG)
     config = {}
 

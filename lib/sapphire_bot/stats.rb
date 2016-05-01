@@ -2,16 +2,18 @@ module SapphireBot
   class Stats
     include StoreData
 
-    attr_accessor :stats_hash, :servers, :users
+    attr_accessor :stats_hash
+
+    attr_reader :servers, :users
 
     def initialize
       @file = "#{Dir.pwd}/data/stats.yml"
 
-      @stats_hash = {}
       temp = load_file(@file)
-      if temp
+      if !load_file(@file).empty?
         @stats_hash = temp
       else
+        @stats_hash = {}
         @stats_hash[:urls_shortened] = 0
         @stats_hash[:messages_read] = 0
         @stats_hash[:urls_shortened] = 0
