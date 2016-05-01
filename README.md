@@ -15,7 +15,7 @@ A simple bot for discord made with [discordrb](https://github.com/meew0/discordr
 
   `Sapphire: PoVa: look at his dank maymay m8: http://goo.gl/U7GO0D`
 
-  This feature is disabled by default, but you can enable it with the following command: `shortening <on/off>`. You can find ignored urls [here](https://github.com/PoVa/sapphire_bot/blob/master/data/ignored_urls.yml).
+  This feature is disabled by default, but you can enable it with the following command: `toggle shortening`. You can find ignored urls [here](https://github.com/PoVa/sapphire_bot/blob/master/data/ignored_urls.yml).
 
 * Owner of the bot can send mass message to all servers by sending the bot a private message.
 
@@ -29,9 +29,7 @@ Commands start with a prefix, which is `!` by default.
   * `about` shows information about this bot.
   * `stats` displays bot statistics.
   * `ping` shows with respond time.
-  * `invite` displays information about inviting this bot to your sever.
-  * `leave` makes the bot leave this server (user needs to have manage server permission).
-  * `avatar <url>` sets avatar of this bot (user needs to be owner of the bot).
+  * `invite` displays information about inviting this bot to your server.
   * `settings` displays current server settings.
 
 * Fun:
@@ -40,19 +38,22 @@ Commands start with a prefix, which is `!` by default.
   * `roll` rolls a dice.
   * `lmgtfy <text> ` generates lmgtfy (Let Me Google That for you) link.
 
-* Moderation:
+* Moderation (Different permissions needed):
 
-  * `delete <ammount>` deletes messages in this channel (user needs to have manage messages permission).
-  * `announce <message>` announces your message server-wide (user needs to have manage messages permission
-  * `kickall` kicks all the members from the server, except you and the bot (user and the bot needs to have kick members permission).
+  * `leave` makes the bot leave this server (manage server).
+  * `delete <ammount>` deletes messages in this channel (manage messages).
+  * `announce <message>` announces your message server-wide (manage messages).
+  * `kickall` kicks all the members from the server, except you and the bot (kick members).
 
-* Configuration
+* Configuration (user needs to have manage server permission to use these)
 
-  * `shortening <on/off>` enables or disables automatic link shortening server-wide (user needs to have manage server permission).
+  * `toggle shortening` toggles automatic link shortening server-wide.
+  * `toggle preview` toggles link preview for automatically shortened links.
 
-* Debugging
+* Debugging and owner only commands:
 
-  * `eval <code>` evaluates Ruby expression(s) (user needs to be owner of the bot). **USE WITH EXTREME CAUTION**
+  * `eval <code>` evaluates Ruby expression(s). **USE WITH EXTREME CAUTION**
+  * `avatar <url>` sets avatar of this bot (user needs to be owner of the bot).
 
 
 ### Support
