@@ -28,6 +28,7 @@ module SapphireBot
   bot.include! Commands::Eval
   bot.include! Commands::Toggle
   bot.include! Commands::Settings
+  bot.include! Commands::Game
   bot.include! Events::Mention
   bot.include! Events::Message::MessagesReadStat
   bot.include! Events::Message::AutoShorten
@@ -36,6 +37,8 @@ module SapphireBot
   bot.run :async
 
   loop do
+    #Test
+    puts bot.users.size
     STATS.update(bot)
     STATS.save
     STATS.inspect

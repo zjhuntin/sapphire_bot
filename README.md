@@ -54,6 +54,7 @@ Commands start with a prefix, which is `!` by default.
 
   * `eval <code>` evaluates Ruby expression(s). **USE WITH EXTREME CAUTION**
   * `avatar <url>` sets avatar of this bot.
+  * `game <text>` sets game status of the bot.
 
 
 ### Support
