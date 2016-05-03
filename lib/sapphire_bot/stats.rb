@@ -23,13 +23,9 @@ module SapphireBot
 
     def update(bot)
       @servers = bot.servers.size
-      @users = 0
-
-      bot.servers.values.each do |server|
-        @users += server.members.size
-      end
+      @users = bot.users.size
     end
-
+    
     def save
       save_to_file(@file, @stats_hash)
     end

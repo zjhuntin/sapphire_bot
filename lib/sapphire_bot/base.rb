@@ -37,8 +37,6 @@ module SapphireBot
   bot.run :async
 
   loop do
-    #Test
-    puts bot.users.size
     STATS.update(bot)
     STATS.save
     STATS.inspect
