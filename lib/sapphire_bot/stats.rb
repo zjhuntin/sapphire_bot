@@ -8,7 +8,7 @@ module SapphireBot
       @file = "#{Dir.pwd}/data/stats.yml"
 
       temp = load_file(@file)
-      if !load_file(@file).empty?
+      if temp.is_a?(Hash) && !temp.empty?
         @stats_hash = temp
       else
         @stats_hash = {}
@@ -25,7 +25,7 @@ module SapphireBot
       @servers = bot.servers.size
       @users = bot.users.size
     end
-    
+
     def save
       save_to_file(@file, @stats_hash)
     end

@@ -3,7 +3,7 @@ module SapphireBot
 
   file = "#{Dir.pwd}/data/config.yml"
   temp = load_file(file)
-  CONFIG = temp unless temp.empty?
+  CONFIG = temp if temp.is_a?(Hash) && !temp.empty?
   unless defined?(CONFIG)
     config = {}
 

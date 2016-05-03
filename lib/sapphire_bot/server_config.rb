@@ -8,7 +8,7 @@ module SapphireBot
     @servers = load_file(@file)
 
     def self.load_config(id)
-      return @servers[id] unless @servers.key?(id).empty?
+      return @servers[id] if @servers.is_a?(Hash) && @servers.key?(id)
       LOGGER.info "created a new config entry for server #{id}."
       @servers[id] = @default_config.clone
     end
