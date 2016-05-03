@@ -15,8 +15,6 @@ module SapphireBot
             LOGGER.log_exception e
           end
           nil
-        else
-          event << 'Only bot owner can use this message.'
         end
       end
     end
