@@ -2,7 +2,6 @@ require 'google_url_shortener'
 
 module SapphireBot
   class Shortener
-    include Helpers
     include StoreData
 
     def initialize
@@ -32,6 +31,10 @@ module SapphireBot
         end.join("\n")
       end
       shorten_url(server, text)
+    end
+
+    def valid_url?(url)
+      url =~ /\A#{URI.regexp}\z/
     end
 
     private
