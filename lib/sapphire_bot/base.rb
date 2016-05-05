@@ -29,6 +29,7 @@ module SapphireBot
   bot.include! Commands::Toggle
   bot.include! Commands::Settings
   bot.include! Commands::Game
+  bot.include! Commands::Ignore
   bot.include! Events::Mention
   bot.include! Events::Message::MessagesReadStat
   bot.include! Events::Message::AutoShorten

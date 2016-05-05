@@ -11,7 +11,7 @@ module SapphireBot
       LOGGER.log_exception e
     end
 
-    #Can be called as shorten(event) if event is Discordrb::Events::MessageEvent or
+    # Can be called as shorten(event) if event is Discordrb::Events::MessageEvent or
     #                 shorten(event.server, text)
     def shorten(var, text = '')
       if var.is_a?(Discordrb::Events::MessageEvent)
@@ -30,6 +30,7 @@ module SapphireBot
           end.join(' ')
         end.join("\n")
       end
+
       shorten_url(server, text)
     end
 
