@@ -8,7 +8,7 @@ module SapphireBot
         video = GOOGLE.find_video(query.join(' '))
         preview = event.server.preview?
         event << if video
-                   "**#{event.author.username}**: #{'<' unless preview}#{video}#{'>' unless preview}"
+                   "**#{event.author.username}**: #{query.join(' ')} #{'<' unless preview}#{video}#{'>' unless preview}"
                  else
                    'Such video does not exist.'
                  end

@@ -4,6 +4,7 @@ require 'google/apis/urlshortener_v1'
 module SapphireBot
   class GoogleServices
     include StoreData
+    include Helpers
 
     def initialize
       @youtube = Google::Apis::YoutubeV3::YouTubeService.new
@@ -27,7 +28,7 @@ module SapphireBot
 
     def shorten_url(url)
       if !@ignored_urls.any? { |ignored_url| url.include?(ignored_url) } &&
-         valid_url(url)
+         valid_url?(url)
         url = Google::Apis::UrlshortenerV1::Url.new(long_url: url)
         url = @shortener.insert_url(url).id
         STATS.stats_hash[:urls_shortened] += 1
