@@ -30,6 +30,7 @@ Commands start with a prefix, which is `!` by default.
   * `stats` displays bot statistics.
   * `ping` shows with respond time.
   * `invite` displays information about inviting this bot to your server.
+  * `yt` finds youtube videos.
   * `settings` displays current server settings.
 
 * Fun:

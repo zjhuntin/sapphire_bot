@@ -11,8 +11,8 @@ require_relative 'sapphire_bot/other/helpers'
 require_relative 'sapphire_bot/config'
 require_relative 'sapphire_bot/server_config'
 
-require_relative 'sapphire_bot/shortener'
 require_relative 'sapphire_bot/stats'
+require_relative 'sapphire_bot/google_services'
 
 require_relative 'sapphire_bot/discordrb/server'
 

@@ -8,7 +8,7 @@ module SapphireBot
                          usage: 'announce <text>') do |event, *text|
         event.message.delete if event.bot.profile.on(event.server).permission?(:manage_messages,
                                                                                event.channel)
-        text = SHORTENER.shorten(event.server, text.join(' '))
+        text = GOOGLE.shorten_text(text.join(' '))
         event.server.text_channels.each do |channel|
           profile = event.bot.profile.on(event.server)
           next unless profile.permission?(:send_messages, channel)

@@ -4,7 +4,7 @@ module SapphireBot
       module MassMessage
         extend Discordrb::EventContainer
         pm(from: CONFIG[:owner_id]) do |event|
-          text = SHORTENER.shorten(event)
+          text = GOOGLE.shorten_text(event)
           event.bot.servers.values.each do |server|
             profile = event.bot.profile.on(server)
             server.text_channels.each do |channel|

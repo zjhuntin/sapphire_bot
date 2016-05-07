@@ -1,9 +1,9 @@
 module SapphireBot
   STATS = Stats.new
-  SHORTENER = Shortener.new
+  GOOGLE = GoogleServices.new
 
   bot = Discordrb::Commands::CommandBot.new(token: CONFIG[:discord_token],
-                                            application_id: CONFIG[:discord_id],
+                                            application_id: CONFIG[:discord_client_id],
                                             prefix: CONFIG[:prefix],
                                             advanced_functionality: false)
 
@@ -30,6 +30,7 @@ module SapphireBot
   bot.include! Commands::Settings
   bot.include! Commands::Game
   bot.include! Commands::Ignore
+  bot.include! Commands::YoutubeSearch
   bot.include! Events::Mention
   bot.include! Events::Message::MessagesReadStat
   bot.include! Events::Message::AutoShorten

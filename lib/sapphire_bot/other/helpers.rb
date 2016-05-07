@@ -17,5 +17,9 @@ module SapphireBot
       return 'enabled' if bool
       'disabled'
     end
+
+    def valid_url?(url)
+      url =~ /\A#{URI.regexp}\z/
+    end
   end
 end
