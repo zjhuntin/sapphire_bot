@@ -1,6 +1,7 @@
 require 'discordrb'
 require 'uri'
 require 'yaml'
+require 'terminal-table'
 
 require_relative 'sapphire_bot/logger'
 

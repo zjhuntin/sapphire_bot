@@ -27,49 +27,18 @@ module SapphireBot
     end
 
     def shorten_url(url)
-      if !@ignored_urls.any? { |ignored_url| url.include?(ignored_url) } &&
-         valid_url?(url)
+      if !@ignored_urls.any? { |ignored_url| url.include?(ignored_url) }
         url_object = Google::Apis::UrlshortenerV1::Url.new(long_url: url)
         shortened_url = @shortener.insert_url(url_object).id
         STATS.stats_hash[:urls_shortened] += 1
+      else
+        return url
       end
       shortened_url
 
     rescue => e
       LOGGER.log_exception e
       url
-    end
-
-    # Can be called as shorten(event, preview) if event is Discordrb::Events::MessageEvent
-    #               or shorten(text, preview)
-    def shorten_text(var, preview = true)
-      if var.is_a?(Discordrb::Events::MessageEvent)
-        text = var.message.content
-      elsif var.is_a?(String)
-        text = var
-      else
-        return nil
-      end
-
-      return text if text || text.length > 21
-
-      if text.include?(' ') || text.include?("\n")
-        return text.lines.map do |line|
-          line.split(' ').map do |word|
-            if valid_url?(word)
-              word = shorten_url(word)
-              word.insert(0, '<').insert(-1, '>') unless preview
-            end
-            word
-          end.join(' ')
-        end.join("\n")
-      elsif valid_url?(text)
-        url = shorten_url(text)
-        url.insert(0, '<').insert(-1, '>') unless preview
-        return url
-      end
-
-      text
     end
   end
 end

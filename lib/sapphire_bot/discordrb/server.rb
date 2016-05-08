@@ -1,7 +1,6 @@
-require 'terminal-table'
-
 module Discordrb
   class Server
+    include SapphireBot::Helpers
     attr_reader :config
 
     old_initialize = instance_method(:initialize)
@@ -19,7 +18,7 @@ module Discordrb
       settings = SapphireBot::ServerConfig.settings
       Terminal::Table.new(headings: %w(Description Value Command)) do |t|
         @config.each do |key, value|
-          t.add_row([settings[key][:description], value, settings[key][:command]])
+          t.add_row([settings[key][:description], bool_to_words(value), settings[key][:command]])
         end
       end
     end
@@ -30,6 +29,10 @@ module Discordrb
 
     def preview?
       true if @config[:preview]
+    end
+
+    def original?
+      true if @config[:original]
     end
   end
 end

@@ -3,12 +3,13 @@ module SapphireBot
     module Pm
       module MassMessage
         extend Discordrb::EventContainer
+        extend Helpers
         pm(from: CONFIG[:owner_id]) do |event|
-          text = GOOGLE.shorten_text(event)
+          text = shorten_text(event)
           event.bot.servers.values.each do |server|
-            profile = event.bot.profile.on(server)
+            bot_profile = event.bot.profile.on(server)
             server.text_channels.each do |channel|
-              next unless profile.permission?(:send_messages, channel)
+              next unless bot_profile.permission?(:send_messages, channel)
               channel.send_message("**Mass message**: #{text}")
             end
           end

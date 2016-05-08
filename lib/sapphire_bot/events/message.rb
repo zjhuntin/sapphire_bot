@@ -3,6 +3,7 @@ module SapphireBot
     module Message
       module MessagesReadStat
         extend Discordrb::EventContainer
+        extend Helpers
         message(starting_with: not!(CONFIG[:prefix]),
                 private: false) do |event|
           STATS.stats_hash[:messages_read] += 1 unless event.author.current_bot?
@@ -10,12 +11,14 @@ module SapphireBot
       end
       module AutoShorten
         extend Discordrb::EventContainer
+        extend Helpers
         message(starting_with: not!(CONFIG[:prefix]),
                 private: false) do |event|
           unless event.from_bot?
-            if event.bot.profile.on(event.server).permission?(:manage_messages, event.channel) &&
+            bot_profile = event.bot.profile.on(event.server)
+            if bot_profile.permission?(:manage_messages, event.channel) &&
                event.server.shortening?
-              text = GOOGLE.shorten_text(event, event.server.preview?)
+              text = shorten_text(event, preview: event.server.preview?, original: event.server.original?)
               unless event.message.content == text
                 event.send_message("**#{event.author.username}**: #{text}")
                 event.message.delete
