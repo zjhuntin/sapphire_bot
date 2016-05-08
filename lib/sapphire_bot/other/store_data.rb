@@ -1,5 +1,3 @@
-require 'yaml'
-
 module SapphireBot
   module StoreData
     def save_to_file(file, object)

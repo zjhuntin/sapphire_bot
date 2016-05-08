@@ -6,9 +6,8 @@ module SapphireBot
                    bucket: :default, min_args: 1,
                    usage: 'yt <query>') do |event, *query|
         video = GOOGLE.find_video(query.join(' '))
-        preview = event.server.preview?
         event << if video
-                   "**#{event.author.username}**: #{query.join(' ')} #{'<' unless preview}#{video}#{'>' unless preview}"
+                   "**#{event.author.username}**: #{query.join(' ')} #{video}"
                  else
                    'Such video does not exist.'
                  end

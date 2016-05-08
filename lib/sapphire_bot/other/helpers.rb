@@ -1,5 +1,3 @@
-require 'uri'
-
 module SapphireBot
   module Helpers
     def time_in_words(time)
@@ -19,7 +17,11 @@ module SapphireBot
     end
 
     def valid_url?(url)
-      url =~ /\A#{URI.regexp}\z/
+      uri = URI.parse(url)
+      return true if uri.kind_of?(URI::HTTP) || uri.kind_of?(URI::HTTPS)
+      false
+    rescue
+      false
     end
   end
 end
