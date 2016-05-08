@@ -53,7 +53,7 @@ module SapphireBot
 
     def valid_url?(url)
       uri = URI.parse(url)
-      return true if uri.kind_of?(URI::HTTP) || uri.kind_of?(URI::HTTPS)
+      return true if uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)
       false
     rescue
       false

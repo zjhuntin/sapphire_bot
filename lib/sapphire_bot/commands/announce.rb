@@ -9,7 +9,7 @@ module SapphireBot
                          usage: 'announce <text>') do |event, *text|
         bot_profile = event.bot.profile.on(event.server)
         event.message.delete if bot_profile.permission?(:manage_messages, event.channel)
-        text = shorten_text(text.join(' '), preview: event.server.preview?, 
+        text = shorten_text(text.join(' '), preview: event.server.preview?,
                                             original: event.server.original?,
                                             minlength: event.server.minlength)
         event.server.text_channels.each do |channel|

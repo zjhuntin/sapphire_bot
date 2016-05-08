@@ -3,7 +3,7 @@ module SapphireBot
     extend StoreData
 
     @file = "#{Dir.pwd}/data/server_config.yml"
-    @default_config = { shortening: false, preview: true, original: true, minlength: 21}
+    @default_config = { shortening: false, preview: true, original: true, minlength: 21 }
 
     @servers = load_file(@file)
 
