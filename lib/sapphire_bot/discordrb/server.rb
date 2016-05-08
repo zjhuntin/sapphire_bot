@@ -15,10 +15,14 @@ module Discordrb
     end
 
     def table
-      settings = SapphireBot::ServerConfig.settings
+      settings_info = SapphireBot::ServerConfig.settings_info
       Terminal::Table.new(headings: %w(Description Value Command)) do |t|
         @config.each do |key, value|
-          t.add_row([settings[key][:description], bool_to_words(value), settings[key][:command]])
+          description = settings_info[key][:description]
+          value = bool_to_words(value) if !!value == value
+          command = "#{settings_info[key][:command]} #{settings_info[key][:setting]}"
+
+          t.add_row([description, value, command])
         end
       end
     end
@@ -33,6 +37,10 @@ module Discordrb
 
     def original?
       true if @config[:original]
+    end
+
+    def minlength
+      @config[:minlength]
     end
   end
 end

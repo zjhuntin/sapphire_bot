@@ -50,6 +50,8 @@ Commands start with a prefix, which is `!` by default.
 
   * `toggle shortening` toggles automatic link shortening server-wide.
   * `toggle preview` toggles link preview for automatically shortened links.
+  * `toggle original` toggles original host before shortened links.
+  * `set minlength <value>` sets minimum link length to shorten.
 
 * Debugging and owner only commands:
 
