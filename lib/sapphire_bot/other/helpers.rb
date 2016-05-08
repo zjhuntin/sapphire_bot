@@ -42,8 +42,7 @@ module SapphireBot
         end
       end
 
-      return shortened_text unless shortened_text == text
-      text
+      return shortened_text
     end
 
     def valid_url?(url)
