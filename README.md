@@ -39,7 +39,7 @@ Commands start with a prefix, which is `!` by default.
   * `roll` rolls a dice.
   * `lmgtfy <text> ` generates lmgtfy (Let Me Google That for you) link.
 
-* Moderation (Different permissions needed):
+* Moderation (different permissions needed):
 
   * `leave` makes the bot leave this server (manage server).
   * `delete <ammount>` deletes messages in this channel (manage messages).
