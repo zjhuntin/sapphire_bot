@@ -28,6 +28,7 @@ module SapphireBot
   bot.include! Commands::Eval
   bot.include! Commands::Toggle
   bot.include! Commands::Set
+  bot.include! Commands::Default
   bot.include! Commands::Settings
   bot.include! Commands::Game
   bot.include! Commands::Ignore

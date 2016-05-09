@@ -1,7 +1,6 @@
 module SapphireBot
   module Commands
     module Set
-      extend Helpers
       extend Discordrb::Commands::CommandContainer
       command(:set, description: 'Allows you to set values of different bot settings server-wide.',
                     usage: 'set <settingname> <value>',

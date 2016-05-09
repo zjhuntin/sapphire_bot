@@ -1,0 +1,23 @@
+---
+:shortening:
+  :description: Automatic link shortening
+  :default: false
+  :command: :toggle
+  :setting: shortening
+:preview:
+  :description: Preview for shorteneed links
+  :default: true
+  :command: :toggle
+  :setting: preview
+:original:
+  :description: Original host before shortened links
+  :default: true
+  :command: :toggle
+  :setting: original
+:minlength:
+  :description: Minimum link length to shorten
+  :default: 50
+  :command: :set
+  :setting: minlength
+  :min: 21
+  :max: 2083
