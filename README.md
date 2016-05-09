@@ -52,6 +52,7 @@ Commands start with a prefix, which is `!` by default.
   * `toggle preview` toggles link preview for automatically shortened links.
   * `toggle original` toggles original host before shortened links.
   * `set minlength <value>` sets minimum link length to shorten.
+  * `default <settingname/all>` resets server setting (or all settings) to default.
 
 * Debugging and owner only commands:
 
@@ -67,8 +68,7 @@ You can find me (@PoVa, ID109268519115329536) on this server: https://discord.gg
 ### Upcoming features
 
 * Web interface
-* Voice features
-* More per-server configuration
+* Voice features (*In progress*)
 
 ### Installing and running
 Make sure you have `git` and `bundler` installed, then

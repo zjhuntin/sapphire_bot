@@ -3,7 +3,7 @@ module SapphireBot
     module Default
       extend Discordrb::Commands::CommandContainer
       extend Helpers
-      command(:default, description: 'Sets server setting or all settings to default',
+      command(:default, description: 'Resets server setting (or all settings) to default',
                        usage: 'default <settingname/all>',
                        required_permissions: [:manage_server],
                        bucket: :default, min_args: 1) do |event, setting|
