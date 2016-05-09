@@ -3,7 +3,7 @@ module SapphireBot
     module Roll
       extend Discordrb::Commands::CommandContainer
       command(:roll, description: 'Rolls a dice.', bucket: :default) do
-        event << rand(1..6)
+        rand(1..6)
       end
     end
   end
