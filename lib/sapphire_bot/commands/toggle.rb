@@ -4,7 +4,7 @@ module SapphireBot
       extend Helpers
       extend Discordrb::Commands::CommandContainer
       command(:toggle, description: 'Allows you to toggle different bot settings server-wide.',
-                       usage: 'toggle <settingname>',
+                       usage: 'toggle <setting>',
                        required_permissions: [:manage_server],
                        bucket: :default, min_args: 1) do |event, setting|
         setting = setting.to_sym

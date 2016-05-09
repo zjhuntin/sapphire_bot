@@ -48,11 +48,9 @@ Commands start with a prefix, which is `!` by default.
 
 * Configuration (user needs to have manage server permission to use these)
 
-  * `toggle shortening` toggles automatic link shortening server-wide.
-  * `toggle preview` toggles link preview for automatically shortened links.
-  * `toggle original` toggles original host before shortened links.
-  * `set minlength <value>` sets minimum link length to shorten.
-  * `default <settingname/all>` resets server setting (or all settings) to default.
+  * `toggle <setting>` allows you to toggle different bot settings.
+  * `set <setting> <value>` allows you to set values of different bot settings.
+  * `default <setting/all>` resets bot setting (or all settings) to default.
 
 * Debugging and owner only commands:
 
