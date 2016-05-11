@@ -77,6 +77,12 @@ If you don't wish to contribute to this repositry, add `--without development` t
 
    `$ bundle install`
 
+Install voice [dependencies](https://github.com/meew0/discordrb#voice-dependencies). This is how I do it on my linux machine:
+
+  `sudo apt-get install libsodium-dev`
+  `sudo apt-get install libopus-dev`
+  `sudo apt-get install libav-tools`
+
 Run the bot.
 
    `$ ./sapphire_bot`
