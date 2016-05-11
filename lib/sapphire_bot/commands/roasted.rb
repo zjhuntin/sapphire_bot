@@ -9,6 +9,8 @@ module SapphireBot
         unless !channel || channel == event.server.afk_channel
           voice = event.bot.voice_connect(channel)
 
+          voice.encoder.use_avconv = true
+
           voice.play_file("#{Dir.pwd}/data/voice_files/roasted.mp3")
           voice.destroy
         end
