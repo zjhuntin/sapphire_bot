@@ -3,8 +3,7 @@ module SapphireBot
     module Stats
       extend Helpers
       extend Discordrb::Commands::CommandContainer
-      command(:stats, bucket: :default,
-                      description: 'Shows bot statistics') do |event|
+      command(:stats, description: 'Shows bot statistics') do |event|
         ping = ((Time.now - event.timestamp) * 1000).to_i
         event << ''
         event << "Servers: #{STATS.servers}."

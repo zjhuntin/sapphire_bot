@@ -3,9 +3,8 @@ module SapphireBot
     module Set
       extend Discordrb::Commands::CommandContainer
       command(:set, description: 'Allows you to set values of different bot settings server-wide.',
-                    usage: 'set <setting> <value>',
-                    required_permissions: [:manage_server],
-                    bucket: :default, min_args: 2) do |event, setting, value|
+                    usage: 'set <setting> <value>', min_args: 2,
+                    required_permissions: [:manage_server]) do |event, setting, value|
         setting = setting.to_sym
         if event.server.config.keys.include?(setting.to_sym)
           setting_info = SapphireBot::ServerConfig.settings_info[setting]

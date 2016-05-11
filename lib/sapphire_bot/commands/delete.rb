@@ -3,8 +3,7 @@ module SapphireBot
     module Delete
       extend Discordrb::Commands::CommandContainer
       command(:delete, description: 'Deletes messages in this channel.',
-                       bucket: :default, min_args: 1,
-                       required_permissions: [:manage_messages],
+                       min_args: 1, required_permissions: [:manage_messages],
                        usage: 'delete <ammount>') do |event, ammount|
         if event.bot.profile.on(event.server).permission?(:manage_messages,
                                                           event.channel)

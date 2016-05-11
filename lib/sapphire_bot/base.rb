@@ -9,9 +9,7 @@ module SapphireBot
 
   LOGGER.info "oauth url: #{bot.invite_url}+&permissions=#{CONFIG[:permissions_code]}"
 
-  bot.bucket(:default, limit: 5,
-                       time_span: 30,
-                       delay: 1)
+  bot.bucket(:voice, delay: 300)
 
   bot.include! Commands::Announce
   bot.include! Commands::Delete
@@ -33,6 +31,7 @@ module SapphireBot
   bot.include! Commands::Game
   bot.include! Commands::Ignore
   bot.include! Commands::YoutubeSearch
+  bot.include! Commands::Roasted
   bot.include! Events::Mention
   bot.include! Events::Message::MessagesReadStat
   bot.include! Events::Message::AutoShorten

@@ -6,7 +6,7 @@ module SapphireBot
       command(:toggle, description: 'Allows you to toggle different bot settings server-wide.',
                        usage: 'toggle <setting>',
                        required_permissions: [:manage_server],
-                       bucket: :default, min_args: 1) do |event, setting|
+                       min_args: 1) do |event, setting|
         setting = setting.to_sym
         if event.server.config.keys.include?(setting.to_sym)
           setting_info = SapphireBot::ServerConfig.settings_info[setting]

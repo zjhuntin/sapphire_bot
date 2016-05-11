@@ -4,9 +4,9 @@ module SapphireBot
       extend Discordrb::Commands::CommandContainer
       extend Helpers
       command(:default, description: 'Resets server setting (or all settings) to default',
-                       usage: 'default <setting/all>',
-                       required_permissions: [:manage_server],
-                       bucket: :default, min_args: 1) do |event, setting|
+                        usage: 'default <setting/all>',
+                        required_permissions: [:manage_server],
+                        min_args: 1) do |event, setting|
         setting = setting.to_sym
         settings_info = SapphireBot::ServerConfig.settings_info
         setting_info = settings_info[setting] if settings_info.key?(setting)

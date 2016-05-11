@@ -3,7 +3,7 @@ module SapphireBot
     module Lmgtfy
       extend Discordrb::Commands::CommandContainer
       extend Helpers
-      command(:lmgtfy, bucket: :default, min_args: 1,
+      command(:lmgtfy, min_args: 1,
                        description: 'Generates Let Me Goole That For You link.',
                        usage: 'lmgtfy <text>') do |event, *text|
         bot_profile = event.bot.profile.on(event.server)
