@@ -7,8 +7,6 @@ module SapphireBot
                                             prefix: CONFIG[:prefix],
                                             advanced_functionality: false)
 
-  LOGGER.info "oauth url: #{bot.invite_url}+&permissions=#{CONFIG[:permissions_code]}"
-
   bot.bucket(:voice, delay: 300)
 
   bot.include! Commands::Announce
@@ -33,17 +31,34 @@ module SapphireBot
   bot.include! Commands::YoutubeSearch
   bot.include! Commands::Roasted
   bot.include! Events::Mention
-  bot.include! Events::Message::MessagesReadStat
-  bot.include! Events::Message::AutoShorten
-  bot.include! Events::Pm::MassMessage
+  bot.include! Events::MessagesReadStat
+  bot.include! Events::AutoShorten
+  bot.include! Events::MassMessage
+  bot.include! Events::ReadyMessage
 
-  bot.run :async
+  system("clear")
 
-  loop do
-    STATS.update(bot)
-    STATS.save
-    STATS.inspect
-    ServerConfig.save
-    sleep(60)
+  Thread.new do
+    loop do
+      STATS.update(bot)
+      STATS.save
+      ServerConfig.save
+      STATS.inspect
+      sleep(60)
+    end
   end
+
+  Thread.new do
+    LOGGER.info 'Type exit to safely stop the bot'
+    loop do
+      next unless gets.chomp == 'exit'
+      LOGGER.info 'Exiting...'
+      STATS.save
+      ServerConfig.save
+      exit
+    end
+  end
+
+  LOGGER.info "Oauth url: #{bot.invite_url}+&permissions=#{CONFIG[:permissions_code]}"
+  bot.run
 end

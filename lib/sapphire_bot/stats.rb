@@ -54,10 +54,10 @@ module SapphireBot
     end
 
     def inspect
-      LOGGER.info "users: #{@users}"
-      LOGGER.info "servers: #{@servers}"
-      LOGGER.info "uptime: #{uptime}"
-      @stats_hash.each { |key, value| LOGGER.info "#{key.to_s.tr('_', ' ')}: #{value} " }
+      LOGGER.info "Users: #{@users}"
+      LOGGER.info "Servers: #{@servers}"
+      LOGGER.info "Uptime: #{uptime}"
+      @stats_hash.each { |key, value| LOGGER.info "#{key.to_s.tr('_', ' ').capitalize}: #{value} " }
     end
   end
 end
