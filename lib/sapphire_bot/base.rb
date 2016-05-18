@@ -7,7 +7,7 @@ module SapphireBot
                                             prefix: CONFIG[:prefix],
                                             advanced_functionality: false)
 
-  bot.bucket(:voice, delay: 300)
+  bot.bucket(:roasted, delay: 3000)
 
   bot.include! Commands::Announce
   bot.include! Commands::Delete
@@ -18,7 +18,6 @@ module SapphireBot
   bot.include! Commands::Stats
   bot.include! Commands::Ping
   bot.include! Commands::KickAll
-  bot.include! Commands::Leave
   bot.include! Commands::About
   bot.include! Commands::Avatar
   bot.include! Commands::Eval
@@ -29,14 +28,24 @@ module SapphireBot
   bot.include! Commands::Game
   bot.include! Commands::Ignore
   bot.include! Commands::YoutubeSearch
-  bot.include! Commands::Roasted
+
+  if CONFIG[:music_bot]
+    bot.include! MusicBot::Commands::MusicHelp
+    bot.include! MusicBot::Commands::Join
+    bot.include! MusicBot::Commands::Leave
+    bot.include! MusicBot::Commands::Add
+    bot.include! MusicBot::Commands::Queue
+    bot.include! MusicBot::Commands::ClearQueue
+    bot.include! MusicBot::Commands::Skip
+  end
+
   bot.include! Events::Mention
   bot.include! Events::MessagesReadStat
   bot.include! Events::AutoShorten
   bot.include! Events::MassMessage
   bot.include! Events::ReadyMessage
 
-  system("clear")
+  system('clear')
 
   Thread.new do
     loop do
@@ -51,10 +60,11 @@ module SapphireBot
   Thread.new do
     LOGGER.info 'Type exit to safely stop the bot'
     loop do
-      next unless gets.chomp == 'exit'
+      next unless gets.chomp.casecmp('exit').zero?
       LOGGER.info 'Exiting...'
       STATS.save
       ServerConfig.save
+      MusicBot.delete_files
       exit
     end
   end

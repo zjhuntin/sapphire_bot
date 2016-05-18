@@ -39,9 +39,18 @@ Commands start with a prefix, which is `!` by default.
   * `roll` rolls a dice.
   * `lmgtfy <text> ` generates lmgtfy (Let Me Google That for you) link.
 
+* Music bot (manage_server permission needed for some commands):
+
+  * `music_help` displays information on how to use music features.
+  * `join` makes the bot join your voice channel (manage_server).
+  * `leave` makes the bot leave your voice channel (manage_server).
+  * `add <query>` adds a song to server queue and starts playing it.
+  * `skip` skips current song (manage_server).
+  * `queue` shows current queue.
+  * `clearqueue <index/all>` deletes songs from server queue  (manage_server).
+
 * Moderation (different permissions needed):
 
-  * `leave` makes the bot leave this server (manage server).
   * `delete <ammount>` deletes messages in this channel (manage messages).
   * `announce <message>` announces your message server-wide (manage messages).
   * `kickall` kicks all the members from the server, except you and the bot (kick members).
@@ -66,24 +75,27 @@ You can find me (@PoVa, ID109268519115329536) on this server: https://discord.gg
 ### Upcoming features
 
 * Web interface
-* Voice features (*In progress*)
 
 ### Installing and running
-Make sure you have `git` and `bundler` installed, then
+1. Make sure you have `git` and `bundler` installed, then
 
    `$ git clone https://github.com/PoVa/sapphire_bot.git`
 
-If you don't wish to contribute to this repositry, add `--without development` to the next command.
-
-   `$ bundle install`
-
-Install voice [dependencies](https://github.com/meew0/discordrb#voice-dependencies). This is how I do it on my linux machine:
+3. (optional) Install voice [dependencies](https://github.com/meew0/discordrb#voice-dependencies). This is how I do it on my linux machine:
 
   `sudo apt-get install libsodium-dev`
+
   `sudo apt-get install libopus-dev`
+
   `sudo apt-get install libav-tools`
 
-Run the bot.
+4. (optional) Remove `music` from command in the following step.
+
+5. Run `bundle install`
+
+  `$ bundle install --without development music`
+
+4. Run the bot.
 
    `$ ./sapphire_bot`
 

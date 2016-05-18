@@ -1,6 +1,3 @@
-require 'google/apis/youtube_v3'
-require 'google/apis/urlshortener_v1'
-
 module SapphireBot
   class GoogleServices
     include StoreData
@@ -20,7 +17,7 @@ module SapphireBot
       result = @youtube.list_searches('snippet', q: query, type: 'video', max_results: 1).items.first
       return unless result
       STATS.stats_hash[:videos_found] += 1
-      "https://youtu.be/#{result.id.video_id}"
+      result.id.video_id
     rescue => e
       LOGGER.log_exception e
       nil
@@ -35,7 +32,6 @@ module SapphireBot
         return url
       end
       shortened_url
-
     rescue => e
       LOGGER.log_exception e
       url

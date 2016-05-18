@@ -29,6 +29,13 @@ module SapphireBot
     config[:permissions_code] = gets.chomp
     config[:permissions_code] = 66321471 if config[:permissions_code].empty?
 
+    puts 'Enable music bot features? (y/n)'
+    config[:music_bot] = if gets.chomp == 'y'
+                       true
+                     else
+                       false
+                     end
+
     save_to_file(file, config)
     CONFIG = config
   end
