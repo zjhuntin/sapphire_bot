@@ -2,6 +2,8 @@ module SapphireBot
   module MusicBot
     MAX_SONG_LENGTH = 600
 
+    MAX_SONGS_IN_QUEUE = 15
+
     @servers = {}
 
     def self.servers

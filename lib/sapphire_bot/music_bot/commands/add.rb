@@ -18,6 +18,11 @@ module SapphireBot
             MusicBot.add_server(id) unless MusicBot.servers.key?(id)
             server = MusicBot.servers[id]
 
+            if server.queue.length >= MAX_SONGS_IN_QUEUE
+              event << 'Queue is too long.'
+              return
+            end
+            
             begin
               server.download_song(video_id, event)
             rescue => e
