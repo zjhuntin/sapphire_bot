@@ -74,6 +74,7 @@ module SapphireBot
                 event.respond("Playing \"#{song.title}\" (#{song.duration}) #{song.url}")
                 event.voice.play_file(song.path)
                 delete_song(song)
+                STATS.stats_hash[:songs_played] += 1
                 if @queue.empty?
                   @playing = false
                   break

@@ -12,6 +12,7 @@ module SapphireBot
         event << "Uptime: #{time_in_words(STATS.uptime)}."
         event << "Urls shortened: #{STATS.urls_shortened}."
         event << "Youtube videos found: #{STATS.videos_found}"
+        event << "Songs played: #{STATS.songs_played}"
         event << "Messages read: #{STATS.messages_read}."
         event << "Ping: #{ping}ms."
       end

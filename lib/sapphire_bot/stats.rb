@@ -19,6 +19,7 @@ module SapphireBot
         @stats_hash[:urls_shortened] = 0
         @stats_hash[:videos_found] = 0
         @stats_hash[:mentions] = 0
+        @stats_hash[:songs_played] = 0
       end
 
       @start_time = Time.now.to_i
@@ -47,6 +48,10 @@ module SapphireBot
 
     def videos_found
       @stats_hash[:videos_found]
+    end
+
+    def songs_played
+      @stats_hash[:songs_played]
     end
 
     def uptime
