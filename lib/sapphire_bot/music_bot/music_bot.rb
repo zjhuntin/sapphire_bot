@@ -6,6 +6,8 @@ module SapphireBot
 
     @servers = {}
 
+    Struct.new('Song', :title, :duration, :path, :url, :ready)
+
     def self.servers
       @servers
     end
@@ -41,7 +43,6 @@ module SapphireBot
         }
 
         delete_dir if Dir.exist?(@server_dir)
-        Struct.new('Song', :title, :duration, :path, :url, :ready)
       end
 
       def download_song(video_id, event)
