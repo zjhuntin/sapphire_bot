@@ -76,10 +76,7 @@ module SapphireBot
                 event.voice.play_file(song.path)
                 delete_song(song)
                 STATS.stats_hash[:songs_played] += 1
-                if @queue.empty?
-                  @playing = false
-                  break
-                end
+                break if @queue.empty?
               else
                 break if retries >= 3
                 event.respond("\"#{song.title}\" is not ready yet, will start playing once it is.")
@@ -87,6 +84,7 @@ module SapphireBot
                 retries += 1
               end
             end
+            @playing = false
           end
         end
       end
