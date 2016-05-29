@@ -98,7 +98,7 @@ module SapphireBot
                       song.title
                     end
             duration = song.duration
-            url = "<#{url}>"
+            url = "<#{song.url}>"
             t.add_row([index + 1, title, duration, url])
           end
         end
