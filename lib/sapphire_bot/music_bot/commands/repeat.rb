@@ -1,7 +1,7 @@
 module SapphireBot
   module MusicBot
     module Commands
-      module Skip
+      module Repeat
         extend Discordrb::Commands::CommandContainer
         command(:repeat, description: 'Repeats the current song.',
                          required_permissions: [:manage_server]) do |event|
