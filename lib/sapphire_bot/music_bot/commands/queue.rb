@@ -7,12 +7,12 @@ module SapphireBot
           id = event.server.id
           if MusicBot.servers.key?(id)
             server = MusicBot.servers[id]
-            event << if server.queue && !server.queue.empty?
-                       "`#{server.table}`"
-                     else
-                       'Queue is empty, use `add` to add more songs.'
-                     end
+            unless server.queue.empty?
+              event << "`#{server.table}`"
+              return
+            end
           end
+          'Queue is empty, use `add` to add more songs.'
         end
       end
     end

@@ -6,7 +6,7 @@ module SapphireBot
 
     @servers = {}
 
-    Struct.new('Song', :title, :duration, :path, :url, :ready)
+    Struct.new('Song', :title, :duration, :path, :url, :ready, :repeat)
 
     def self.servers
       @servers
@@ -57,7 +57,11 @@ module SapphireBot
           else
             event.respond("Downloading \"#{song.title}\".")
           end
-          struct = Struct::Song.new(song.title, duration_format(song.duration), song.filename, "https://youtu.be/#{song.url}", false)
+          struct = Struct::Song.new(song.title,
+                                    duration_format(song.duration),
+                                    song.filename, "https://youtu.be/#{song.url}",
+                                    false,
+                                    false)
           @queue << struct
           song.download
           @queue.find { |x| x == struct }.ready = true
@@ -71,18 +75,14 @@ module SapphireBot
             loop do
               song = @queue.first
               if song.ready
-                @playing = true
-                event.respond("Playing \"#{song.title}\" (#{song.duration}) #{song.url}")
-                event.voice.play_file(song.path)
-                delete_song(song)
-                STATS.stats_hash[:songs_played] += 1
-                break if @queue.empty?
+                play_song(event, song)
               else
-                break if retries >= 3
+                break if retries >= 5
                 event.respond("\"#{song.title}\" is not ready yet, will start playing once it is.")
                 sleep(10)
                 retries += 1
               end
+              break if @queue.empty?
             end
             @playing = false
           end
@@ -109,18 +109,35 @@ module SapphireBot
         @queue = []
       end
 
+      def delete_first_song
+        delete_song(@queue.first)
+      end
+
       def delete_song(song)
-        File.delete(song.path) if File.exist?(song.path)
         @queue.delete(song)
+        File.delete(song.path) if File.exist?(song.path)
       end
 
       def delete_song_at(index)
         file = @queue[index].path
-        File.delete(file) if File.exist?(file)
         @queue.delete_at(index)
+        File.delete(file) if File.exist?(file)
       end
 
       private
+
+      def play_song(event, song)
+        @playing = true
+        event.respond("Playing \"#{song.title}\" (#{song.duration}) #{song.url}")
+        loop do
+          event.voice.play_file(song.path)
+          unless song.repeat
+            delete_first_song
+            return
+          end
+          STATS.stats_hash[:songs_played] += 1
+        end
+      end
 
       def duration_format(seconds)
         minutes = seconds / 60
