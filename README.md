@@ -39,23 +39,24 @@ Commands start with a prefix, which is `!` by default.
   * `roll` rolls a dice.
   * `lmgtfy <text> ` generates lmgtfy (Let Me Google That for you) link.
 
-* Music bot (manage_server permission needed for some commands):
+* Music bot:
 
   * `music_help` displays information on how to use music features.
-  * `join` makes the bot join your voice channel (manage_server).
-  * `leave` makes the bot leave your voice channel (manage_server).
+  * `join` makes the bot join your voice channel (manage server).
+  * `leave` makes the bot leave your voice channel (manage server).
   * `add <query>` adds a song to server queue and starts playing it.
-  * `skip` skips current song (manage_server).
+  * `skip` skips current song (manage server).
   * `queue` shows current queue.
-  * `clearqueue <index/all>` deletes songs from server queue  (manage_server).
+  * `clearqueue <index/all>` deletes songs from server queue (manage server).
+  * `repeat` repeats the current song (manage server)
 
-* Moderation (different permissions needed):
+* Moderation:
 
   * `delete <ammount>` deletes messages in this channel (manage messages).
   * `announce <message>` announces your message server-wide (manage messages).
   * `kickall` kicks all the members from the server, except you and the bot (kick members).
 
-* Configuration (user needs to have manage server permission to use these)
+* Configuration:
 
   * `toggle <setting>` allows you to toggle different bot settings.
   * `set <setting> <value>` allows you to set values of different bot settings.
