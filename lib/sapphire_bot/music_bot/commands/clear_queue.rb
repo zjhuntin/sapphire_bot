@@ -10,14 +10,18 @@ module SapphireBot
           id = event.server.id
           if MusicBot.servers.key?(id)
             server = MusicBot.servers[id]
-            if argument.chomp.casecmp('all').zero?
+            if argument.chomp == 'all'
               event.voice.stop_playing
               server.delete_dir
-            elsif server.queue.length >= argument.to_i - 1 && argument.to_i >= 1
+            elsif argument.to_i.between?(1, server.queue.length)
               index = argument.to_i - 1
-              event.voice.stop_playing if index == 0
-              server.delete_song_at(index)
-            elsif server.queue.length < argument.to_i - 1 || argument.to_i < 1
+              if index == 0
+                event.voice.stop_playing
+                server.queue.first.repeat = false
+              else
+                server.delete_song_at(index)
+              end
+            elsif !argument.to_i.between?(1, server.queue.length)
               event << "Can't find song with such index"
             else
               event << 'Unkonwn argument, use `all` or song index.'
