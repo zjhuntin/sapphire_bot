@@ -22,7 +22,7 @@ module SapphireBot
               event << 'Queue is too long.'
               return
             end
-            
+
             begin
               server.download_song(video_id, event)
             rescue => e
