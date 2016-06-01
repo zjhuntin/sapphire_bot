@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'discordrb',            '~> 2.1.1'
+gem 'discordrb',            '~> 2.1.2'
 gem 'terminal-table',       '~> 1.5.2'
 gem 'google-api-client',    '0.9.6'
 
