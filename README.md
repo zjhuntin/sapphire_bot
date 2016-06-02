@@ -111,6 +111,7 @@ After you've done with configuration, invite url should pop up, use it to make t
 ### Debugging
 
   Run the bot with `-debug` command line option:
+  
   `$ ./run -debug`
 
 ### Contributing
