@@ -7,6 +7,7 @@ module Discordrb
     define_method(:initialize) do |data, bot, exists = true|
       old_initialize.bind(self).call(data, bot, exists)
       @config = SapphireBot::ServerConfig.load_config(@id)
+      create_methods
     end
 
     def update_config(attributes = {})
@@ -27,20 +28,14 @@ module Discordrb
       end
     end
 
-    def shortening?
-      @config[:shortening]
-    end
+    private
 
-    def preview?
-      @config[:preview]
-    end
-
-    def original?
-      @config[:original]
-    end
-
-    def minlength
-      @config[:minlength]
+    def create_methods
+      @config.keys.each do |key|
+        self.class.send(:define_method, key) do
+          @config[key]
+        end
+      end
     end
   end
 end
