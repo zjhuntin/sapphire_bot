@@ -18,32 +18,28 @@ module SapphireBot
 
     # Can be called as shorten(event) (if event is Discordrb::Events::MessageEvent or Discordrb::Events::PrivateMessageEvent)
     #               or shorten(text, attributes)
-    def shorten_text(var, attributes = {})
+    def shorten_text(var, preview: true, origial: true, minlength: 21)
       if var.is_a?(Discordrb::Events::MessageEvent)
         text = var.message.content
-        attributes[:preview] = var.server.preview? if attributes[:preview].nil?
-        attributes[:original] = var.server.original? if attributes[:original].nil?
-        attributes[:minlength] = var.server.minlength if attributes[:minlength].nil?
+        preview = var.server.preview? if preview.nil?
+        original = var.server.original? if original.nil?
+        minlength = var.server.minlength if minlength.nil?
       elsif var.is_a?(Discordrb::Events::PrivateMessageEvent)
         text = var.message.content
       elsif var.is_a?(String)
         text = var
       end
 
-      attributes[:preview] = true if attributes[:preview].nil?
-      attributes[:original] = true if attributes[:original].nil?
-      attributes[:minlength] = 21 if attributes[:minlength].nil?
-
-      return text if !text || text.length < attributes[:minlength]
+      return text if !text || text.length < minlength
 
       shortened_text = text.clone
 
       URI.extract(text) do |url|
-        next if url.length < attributes[:minlength]
+        next if url.length < minlength
         shortened_url = GOOGLE.shorten_url(url)
         unless shortened_url == url
-          shortened_url.insert(0, '<').insert(-1, '>') unless attributes[:preview]
-          shortened_url.insert(0, "(#{url_host(url)}) ") if attributes[:original]
+          shortened_url.insert(0, '<').insert(-1, '>') unless preview
+          shortened_url.insert(0, "(#{url_host(url)}) ") if original
           shortened_text.gsub!(url, shortened_url)
         end
       end

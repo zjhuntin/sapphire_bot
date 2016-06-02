@@ -32,6 +32,8 @@ module SapphireBot
         return url
       end
       shortened_url
+    rescue Google::Apis::ClientError
+      url
     rescue => e
       LOGGER.log_exception e
       url
