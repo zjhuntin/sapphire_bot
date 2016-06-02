@@ -30,6 +30,8 @@ module SapphireBot
 
   if CONFIG[:music_bot]
     require 'youtube-dl.rb'
+    require_relative 'sapphire_bot/music_bot/song'
+    require_relative 'sapphire_bot/music_bot/server_queue'
     require_relative 'sapphire_bot/music_bot/music_bot'
     Dir["#{File.dirname(__FILE__)}/sapphire_bot/music_bot/commands/*.rb"].each { |file| require file }
   end

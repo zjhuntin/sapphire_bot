@@ -48,7 +48,7 @@ Commands start with a prefix, which is `!` by default.
   * `skip` skips current song (manage server).
   * `queue` shows current queue.
   * `clearqueue <index/all>` deletes songs from server queue (manage server).
-  * `repeat` repeats the current song (manage server)
+  * `repeat` toggles repeat (manage server).
 
 * Moderation:
 

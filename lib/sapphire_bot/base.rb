@@ -37,6 +37,7 @@ module SapphireBot
     bot.include! MusicBot::Commands::Queue
     bot.include! MusicBot::Commands::ClearQueue
     bot.include! MusicBot::Commands::Skip
+    bot.include! MusicBot::Commands::Repeat
   end
 
   bot.include! Events::Mention
