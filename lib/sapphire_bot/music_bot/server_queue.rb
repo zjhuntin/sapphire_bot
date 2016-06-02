@@ -37,8 +37,10 @@ module SapphireBot
           song_object = Song.new(song.title, song.duration,
                                  song.filename, song.url)
           @queue << song_object
+          LOGGER.debug "Downloading a song for server #{@id}. #{song_object.inspect}"
           song.download
           @queue.find { |x| x == song_object }.ready = true
+          LOGGER.debug "Song downloaded succesfully for server #{@id}. #{song_object.inspect}"
         end
       end
 
@@ -46,6 +48,7 @@ module SapphireBot
         unless @playing || @queue.first.nil?
           @playing = true
           loop do
+            LOGGER.debug "Started music loop for server #{@id}"
             if @queue.empty?
               event.respond('Queue is empty, add more songs with `add` command.')
               break
@@ -86,6 +89,7 @@ module SapphireBot
 
       def play_song(song, event)
         event.respond("Playing \"#{song.title}\" (#{song.duration}) #{song.url}")
+        LOGGER.debug "Playing a song (#{song.inspect}), repeating: #{@repeat}"
         loop do
           event.voice.play_file(song.path)
           STATS.songs_played += 1
@@ -99,8 +103,12 @@ module SapphireBot
       def wait_for_song(song, event)
         retries = 0
         loop do
+          LOGGER.debug "Waiting for song to be available on server #{@id} (#{song.inspect}) #{"(#{retries})" if retries > 0}"
           return true if song.ready
-          return false if retries > 3
+          if retries > 3
+            LOGGER.debug "Song was not available after #{retries} retries on server #{@id}. (#{song.inspect})"
+            return false
+          end
           event.respond("\"#{song.title}\" is not ready yet, will start playing once it is.")
           retries += 1
           sleep(10)

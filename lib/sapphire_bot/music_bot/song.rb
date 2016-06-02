@@ -11,6 +11,7 @@ module SapphireBot
         @path = path
         @url = "https://youtu.be/#{url}"
         @ready = ready
+        LOGGER.debug "Initialized a new song (#{inspect})"
       end
 
       def duration_formated
@@ -22,6 +23,10 @@ module SapphireBot
 
       def delete_file
         File.delete(path) if File.exist?(path)
+      end
+
+      def inspect
+        "title: #{@title}, duration: #{@duration}, path: #{@path}, url: #{@url}"
       end
     end
   end

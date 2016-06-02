@@ -10,6 +10,7 @@ module SapphireBot
             event.bot.voice_connect(channel)
             event.voice.encoder.use_avconv = true
             event << "Joined \"#{channel.name}\". You can now add songs to queue with `add` command."
+            LOGGER.debug "Music bot joined #{event.channel.id}."
           end
           nil
         end

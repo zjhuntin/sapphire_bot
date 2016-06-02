@@ -8,6 +8,7 @@ module SapphireBot
           if event.voice
             event.voice.destroy
             MusicBot.delete_server(event.server.id)
+            LOGGER.debug "Music bot left #{event.channel.id}."
           end
           nil
         end

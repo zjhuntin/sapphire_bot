@@ -76,6 +76,7 @@ You can find me (@PoVa, ID109268519115329536) on this server: https://discord.gg
 ### Upcoming features
 
 * Web interface
+* Tests
 
 ### Installing and running
 1. Make sure you have `git` and `bundler` installed, then
@@ -98,18 +99,23 @@ You can find me (@PoVa, ID109268519115329536) on this server: https://discord.gg
 
 4. Run the bot.
 
-   `$ ./sapphire_bot`
+   `$ ./run`
 
 After you've done with configuration, invite url should pop up, use it to make the bot join your server.
 
 ### Updating
 
   `$ git pull`
+  `$ bundle install`
+
+### Debugging
+
+  Run the bot with `-debug` command line option:
+  `$ ./run -debug`
 
 ### Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/PoVa/sapphire_bot. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
 
 ### License
 

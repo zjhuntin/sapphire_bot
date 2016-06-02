@@ -36,6 +36,7 @@ module SapphireBot
     end
 
     def save
+      LOGGER.debug 'Saving stats'
       save_to_file(@file, @stats)
     end
 

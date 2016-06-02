@@ -9,9 +9,14 @@ require 'terminal-table'
 
 require_relative 'sapphire_bot/logger'
 
-module SapphireBot
-  Discordrb::LOGGER = LOGGER = Logger.new
+debug = ARGV.include?('-debug') ? true : false
+if debug
+  Discordrb::LOGGER = SapphireBot::LOGGER = SapphireBot::Logger.new(:debug)
+else
+  Discordrb::LOGGER = SapphireBot::LOGGER = SapphireBot::Logger.new
+end
 
+module SapphireBot
   require_relative 'sapphire_bot/version'
   require_relative 'sapphire_bot/other/store_data'
   require_relative 'sapphire_bot/other/helpers'

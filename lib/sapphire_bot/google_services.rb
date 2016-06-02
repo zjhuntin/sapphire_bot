@@ -17,6 +17,7 @@ module SapphireBot
       result = @youtube.list_searches('snippet', q: query, type: 'video', max_results: 1).items.first
       return unless result
       STATS.videos_found += 1
+      LOGGER.debug "Searched for video \"#{query}\" and found #{result.id.video_id}"
       result.id.video_id
     rescue => e
       LOGGER.log_exception e
@@ -28,6 +29,7 @@ module SapphireBot
         url_object = Google::Apis::UrlshortenerV1::Url.new(long_url: url)
         shortened_url = @shortener.insert_url(url_object).id
         STATS.urls_shortened += 1
+        LOGGER.debug "Shortened \"#{url}\" to \"#{shortened_url}\""
       else
         return url
       end
