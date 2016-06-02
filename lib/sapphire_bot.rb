@@ -1,7 +1,6 @@
 require 'uri'
 require 'yaml'
 require 'fileutils'
-require 'cgi'
 
 require 'google/apis/youtube_v3'
 require 'google/apis/urlshortener_v1'
