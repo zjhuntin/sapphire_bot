@@ -18,7 +18,7 @@ module SapphireBot
 
     # Can be called as shorten(event) (if event is Discordrb::Events::MessageEvent or Discordrb::Events::PrivateMessageEvent)
     #               or shorten(text, attributes)
-    def shorten_text(var, preview: true, origial: true, minlength: 21)
+    def shorten_text(var, preview: true, original: true, minlength: 21)
       if var.is_a?(Discordrb::Events::MessageEvent)
         text = var.message.content
         preview = var.server.preview if preview.nil?

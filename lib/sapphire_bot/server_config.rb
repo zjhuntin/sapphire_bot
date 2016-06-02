@@ -7,7 +7,7 @@ module SapphireBot
 
     Thread.new do
       loop do
-        self.save
+        save
         sleep(60)
       end
     end
