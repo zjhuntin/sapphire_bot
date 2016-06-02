@@ -3,7 +3,7 @@ module SapphireBot
     module MessagesReadStat
       extend Discordrb::EventContainer
       extend Helpers
-      message(starting_with: not!(CONFIG[:prefix]),
+      message(starting_with: not!(CONFIG.prefix),
               private: false) do |event|
         STATS.messages_read += 1 unless event.author.current_bot?
       end
@@ -11,7 +11,7 @@ module SapphireBot
     module AutoShorten
       extend Discordrb::EventContainer
       extend Helpers
-      message(starting_with: not!(CONFIG[:prefix]),
+      message(starting_with: not!(CONFIG.prefix),
               private: false) do |event|
         unless event.from_bot?
           bot_profile = event.bot.profile.on(event.server)

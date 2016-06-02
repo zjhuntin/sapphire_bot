@@ -16,13 +16,14 @@ else
   Discordrb::LOGGER = SapphireBot::LOGGER = SapphireBot::Logger.new
 end
 
-module SapphireBot
-  require_relative 'sapphire_bot/version'
-  require_relative 'sapphire_bot/other/store_data'
-  require_relative 'sapphire_bot/other/helpers'
+require_relative 'sapphire_bot/version'
+require_relative 'sapphire_bot/other/store_data'
+require_relative 'sapphire_bot/other/helpers'
+require_relative 'sapphire_bot/config'
+require_relative 'sapphire_bot/server_config'
 
-  require_relative 'sapphire_bot/config'
-  require_relative 'sapphire_bot/server_config'
+module SapphireBot
+  CONFIG = Config.new
 
   require_relative 'sapphire_bot/stats'
   require_relative 'sapphire_bot/google_services'
@@ -32,7 +33,7 @@ module SapphireBot
   Dir["#{File.dirname(__FILE__)}/sapphire_bot/commands/*.rb"].each { |file| require file }
   Dir["#{File.dirname(__FILE__)}/sapphire_bot/events/*.rb"].each { |file| require file }
 
-  if CONFIG[:music_bot]
+  if CONFIG.music_bot
     require 'youtube-dl.rb'
     require_relative 'sapphire_bot/music_bot/song'
     require_relative 'sapphire_bot/music_bot/server_queue'

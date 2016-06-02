@@ -3,7 +3,7 @@ module SapphireBot
     module MassMessage
       extend Discordrb::EventContainer
       extend Helpers
-      pm(from: CONFIG[:owner_id]) do |event|
+      pm(from: CONFIG.owner_id) do |event|
         text = shorten_text(event)
         event.bot.servers.values.each do |server|
           bot_profile = event.bot.profile.on(server)

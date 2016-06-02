@@ -4,7 +4,7 @@ module SapphireBot
       extend Discordrb::Commands::CommandContainer
       command(:game, description: 'Sets game status of the bot.',
                      usage: 'game <text>', min_args: 1) do |event, *text|
-        event.bot.game = text.join(' ') if event.author.id == CONFIG[:owner_id]
+        event.bot.game = text.join(' ') if event.author.id == CONFIG.owner_id
         nil
       end
     end

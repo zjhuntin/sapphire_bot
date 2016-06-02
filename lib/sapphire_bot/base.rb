@@ -1,9 +1,9 @@
 module SapphireBot
   GOOGLE = GoogleServices.new
 
-  BOT = Discordrb::Commands::CommandBot.new(token: CONFIG[:discord_token],
-                                            application_id: CONFIG[:discord_client_id],
-                                            prefix: CONFIG[:prefix],
+  BOT = Discordrb::Commands::CommandBot.new(token: CONFIG.discord_token,
+                                            application_id: CONFIG.discord_client_id,
+                                            prefix: CONFIG.prefix,
                                             advanced_functionality: false)
 
   STATS = Stats.new
@@ -30,7 +30,7 @@ module SapphireBot
   BOT.include! Commands::Ignore
   BOT.include! Commands::YoutubeSearch
 
-  if CONFIG[:music_bot]
+  if CONFIG.music_bot
     BOT.include! MusicBot::Commands::MusicHelp
     BOT.include! MusicBot::Commands::Join
     BOT.include! MusicBot::Commands::Leave
@@ -59,6 +59,6 @@ module SapphireBot
     end
   end
 
-  LOGGER.info "Oauth url: #{BOT.invite_url}+&permissions=#{CONFIG[:permissions_code]}"
+  LOGGER.info "Oauth url: #{BOT.invite_url}+&permissions=#{CONFIG.permissions_code}"
   BOT.run
 end

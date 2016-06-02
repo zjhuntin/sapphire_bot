@@ -7,8 +7,8 @@ module SapphireBot
       @youtube = Google::Apis::YoutubeV3::YouTubeService.new
       @shortener = Google::Apis::UrlshortenerV1::UrlshortenerService.new
 
-      @shortener.key = CONFIG[:google_api_key]
-      @youtube.key = CONFIG[:google_api_key]
+      @shortener.key = CONFIG.google_api_key
+      @youtube.key = CONFIG.google_api_key
 
       @ignored_urls = load_file("#{Dir.pwd}/data/ignored_urls.yml")
     end
