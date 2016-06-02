@@ -30,15 +30,15 @@ module SapphireBot
   BOT.include! Commands::Ignore
   BOT.include! Commands::YoutubeSearch
 
-  if CONFIG[:music_BOT]
-    BOT.include! MusicBOT::Commands::MusicHelp
-    BOT.include! MusicBOT::Commands::Join
-    BOT.include! MusicBOT::Commands::Leave
-    BOT.include! MusicBOT::Commands::Add
-    BOT.include! MusicBOT::Commands::Queue
-    BOT.include! MusicBOT::Commands::ClearQueue
-    BOT.include! MusicBOT::Commands::Skip
-    BOT.include! MusicBOT::Commands::Repeat
+  if CONFIG[:music_bot]
+    BOT.include! MusicBot::Commands::MusicHelp
+    BOT.include! MusicBot::Commands::Join
+    BOT.include! MusicBot::Commands::Leave
+    BOT.include! MusicBot::Commands::Add
+    BOT.include! MusicBot::Commands::Queue
+    BOT.include! MusicBot::Commands::ClearQueue
+    BOT.include! MusicBot::Commands::Skip
+    BOT.include! MusicBot::Commands::Repeat
   end
 
   BOT.include! Events::Mention
@@ -46,13 +46,6 @@ module SapphireBot
   BOT.include! Events::AutoShorten
   BOT.include! Events::MassMessage
   BOT.include! Events::ReadyMessage
-
-  Thread.new do
-    loop do
-      ServerConfig.save
-      sleep(60)
-    end
-  end
 
   Thread.new do
     LOGGER.info 'Type exit to safely stop the bot'
