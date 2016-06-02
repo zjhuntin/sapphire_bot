@@ -88,7 +88,7 @@ module SapphireBot
         event.respond("Playing \"#{song.title}\" (#{song.duration}) #{song.url}")
         loop do
           event.voice.play_file(song.path)
-          STATS.stats_hash[:songs_played] += 1
+          STATS.songs_played += 1
           next if @repeat && !@skip
           @skip = false
           delete_first_song

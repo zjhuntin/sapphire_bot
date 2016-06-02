@@ -1,59 +1,55 @@
 module SapphireBot
-  STATS = Stats.new
   GOOGLE = GoogleServices.new
 
-  bot = Discordrb::Commands::CommandBot.new(token: CONFIG[:discord_token],
+  BOT = Discordrb::Commands::CommandBot.new(token: CONFIG[:discord_token],
                                             application_id: CONFIG[:discord_client_id],
                                             prefix: CONFIG[:prefix],
                                             advanced_functionality: false)
 
-  bot.bucket(:roasted, delay: 3000)
+  STATS = Stats.new
 
-  bot.include! Commands::Announce
-  bot.include! Commands::Delete
-  bot.include! Commands::Flip
-  bot.include! Commands::Invite
-  bot.include! Commands::Lmgtfy
-  bot.include! Commands::Roll
-  bot.include! Commands::Stats
-  bot.include! Commands::Ping
-  bot.include! Commands::KickAll
-  bot.include! Commands::About
-  bot.include! Commands::Avatar
-  bot.include! Commands::Eval
-  bot.include! Commands::Toggle
-  bot.include! Commands::Set
-  bot.include! Commands::Default
-  bot.include! Commands::Settings
-  bot.include! Commands::Game
-  bot.include! Commands::Ignore
-  bot.include! Commands::YoutubeSearch
+  BOT.bucket(:roasted, delay: 3000)
 
-  if CONFIG[:music_bot]
-    bot.include! MusicBot::Commands::MusicHelp
-    bot.include! MusicBot::Commands::Join
-    bot.include! MusicBot::Commands::Leave
-    bot.include! MusicBot::Commands::Add
-    bot.include! MusicBot::Commands::Queue
-    bot.include! MusicBot::Commands::ClearQueue
-    bot.include! MusicBot::Commands::Skip
-    bot.include! MusicBot::Commands::Repeat
+  BOT.include! Commands::Announce
+  BOT.include! Commands::Delete
+  BOT.include! Commands::Flip
+  BOT.include! Commands::Invite
+  BOT.include! Commands::Lmgtfy
+  BOT.include! Commands::Roll
+  BOT.include! Commands::Stats
+  BOT.include! Commands::Ping
+  BOT.include! Commands::KickAll
+  BOT.include! Commands::About
+  BOT.include! Commands::Avatar
+  BOT.include! Commands::Eval
+  BOT.include! Commands::Toggle
+  BOT.include! Commands::Set
+  BOT.include! Commands::Default
+  BOT.include! Commands::Settings
+  BOT.include! Commands::Game
+  BOT.include! Commands::Ignore
+  BOT.include! Commands::YoutubeSearch
+
+  if CONFIG[:music_BOT]
+    BOT.include! MusicBOT::Commands::MusicHelp
+    BOT.include! MusicBOT::Commands::Join
+    BOT.include! MusicBOT::Commands::Leave
+    BOT.include! MusicBOT::Commands::Add
+    BOT.include! MusicBOT::Commands::Queue
+    BOT.include! MusicBOT::Commands::ClearQueue
+    BOT.include! MusicBOT::Commands::Skip
+    BOT.include! MusicBOT::Commands::Repeat
   end
 
-  bot.include! Events::Mention
-  bot.include! Events::MessagesReadStat
-  bot.include! Events::AutoShorten
-  bot.include! Events::MassMessage
-  bot.include! Events::ReadyMessage
-
-  system('clear')
+  BOT.include! Events::Mention
+  BOT.include! Events::MessagesReadStat
+  BOT.include! Events::AutoShorten
+  BOT.include! Events::MassMessage
+  BOT.include! Events::ReadyMessage
 
   Thread.new do
     loop do
-      STATS.update(bot)
-      STATS.save
       ServerConfig.save
-      STATS.inspect
       sleep(60)
     end
   end
@@ -70,6 +66,6 @@ module SapphireBot
     end
   end
 
-  LOGGER.info "Oauth url: #{bot.invite_url}+&permissions=#{CONFIG[:permissions_code]}"
-  bot.run
+  LOGGER.info "Oauth url: #{BOT.invite_url}+&permissions=#{CONFIG[:permissions_code]}"
+  BOT.run
 end

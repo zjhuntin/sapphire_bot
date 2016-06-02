@@ -5,7 +5,7 @@ module SapphireBot
       extend Helpers
       message(starting_with: not!(CONFIG[:prefix]),
               private: false) do |event|
-        STATS.stats_hash[:messages_read] += 1 unless event.author.current_bot?
+        STATS.messages_read += 1 unless event.author.current_bot?
       end
     end
     module AutoShorten
