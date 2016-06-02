@@ -28,15 +28,15 @@ module Discordrb
     end
 
     def shortening?
-      true if @config[:shortening]
+      @config[:shortening]
     end
 
     def preview?
-      true if @config[:preview]
+      @config[:preview]
     end
 
     def original?
-      true if @config[:original]
+      @config[:original]
     end
 
     def minlength
