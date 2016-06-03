@@ -1,17 +1,25 @@
 module SapphireBot
   module MusicBot
     class Song
-      attr_reader :title, :duration, :path, :url
+      attr_reader :title, :duration, :path, :url, :ready, :valid
 
-      attr_accessor :ready
+      def initialize(video_id, path)
+        download_options = DOWNLOAD_OPTIONS
+        download_options[:output] = "#{path}/%(title)s.mp3"
 
-      def initialize(title, duration, path, url, ready = false)
-        @title = title
-        @duration = duration
-        @path = path
-        @url = "https://youtu.be/#{url}"
-        @ready = ready
-        LOGGER.debug "Initialized a new song (#{inspect})"
+        @youtube_dl = YoutubeDL::Video.new(video_id, download_options)
+
+        @title = @youtube_dl.title
+        @duration = @youtube_dl.duration
+        @path = @youtube_dl.filename
+        @url = "https://youtu.be/##{@youtube_dl.url}"
+        @ready = false
+
+        @valid = if @duration > MAX_SONG_LENGTH
+                   false
+                 else
+                   true
+                 end
       end
 
       def duration_formated
@@ -22,11 +30,21 @@ module SapphireBot
       end
 
       def delete_file
-        File.delete(path) if File.exist?(path)
+        File.delete(@path) if File.exist?(@path)
       end
 
       def inspect
         "title: #{@title}, duration: #{@duration}, path: #{@path}, url: #{@url}"
+      end
+
+      def download
+        @youtube_dl.download
+      rescue => e
+        LOGGER.log_exception e
+        false
+      else
+        @ready = true
+        true
       end
     end
   end

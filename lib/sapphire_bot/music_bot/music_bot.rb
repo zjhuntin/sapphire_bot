@@ -4,6 +4,12 @@ module SapphireBot
 
     MAX_SONGS_IN_QUEUE = 15
 
+    DOWNLOAD_OPTIONS = {
+      extract_audio: true,
+      audio_format: 'mp3',
+      format: :worst
+    }
+
     @servers = {}
 
     def self.servers

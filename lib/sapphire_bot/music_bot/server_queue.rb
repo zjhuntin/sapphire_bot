@@ -12,35 +12,25 @@ module SapphireBot
         @skip = false
         @playing = false
         @server_dir = "#{Dir.pwd}/data/music_bot/#{id}"
-        @download_options = {
-          extract_audio: true,
-          audio_format: 'mp3',
-          format: :worst,
-          output: "#{@server_dir}/%(title)s.mp3"
-        }
 
         delete_dir if Dir.exist?(@server_dir)
       end
 
-      def download_song(video_id, event)
-        song = YoutubeDL::Video.new(video_id, @download_options)
-
-        if song.duration >= MAX_SONG_LENGTH
-          event.respond("Song \"#{song.title}\" is longer than allowed (#{MAX_SONG_LENGTH}s).")
-          return
-        else
-          if song.duration >= MAX_SONG_LENGTH / 2
-            event.respond("Downloading \"#{song.title}\", this might take a while.")
+      def add_to_queue(video_id, event)
+        song = Song.new(video_id, @server_dir)
+        if song.valid
+          event.respond("Downloading \"#{song.title}\".")
+          @queue << song
+          if song.download
+            true
           else
-            event.respond("Downloading \"#{song.title}\".")
+            @queue.delete(song)
+            event.respond("There was a problem downloading \"#{song.title}\"")
+            false
           end
-          song_object = Song.new(song.title, song.duration,
-                                 song.filename, song.url)
-          @queue << song_object
-          LOGGER.debug "Downloading a song for server #{@id}. #{song_object.inspect}"
-          song.download
-          @queue.find { |x| x == song_object }.ready = true
-          LOGGER.debug "Song downloaded succesfully for server #{@id}. #{song_object.inspect}"
+        else
+          event.respond("The song is too long. Maximum length is #{MAX_SONG_LENGTH} seconds.")
+          false
         end
       end
 
@@ -88,7 +78,7 @@ module SapphireBot
       private
 
       def play_song(song, event)
-        event.respond("Playing \"#{song.title}\" (#{song.duration}) #{song.url}")
+        event.respond("Playing \"#{song.title}\" (#{song.duration_formated}) #{song.url}")
         LOGGER.debug "Playing a song (#{song.inspect}), repeating: #{@repeat}"
         loop do
           event.voice.play_file(song.path)

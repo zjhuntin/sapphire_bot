@@ -23,16 +23,9 @@ module SapphireBot
               return
             end
 
-            begin
-              server.download_song(video_id, event)
-            rescue => e
-              event << "There was a problem downloading  \"#{query}\"."
-              LOGGER.log_exception e
-              return
+            if server.add_to_queue(video_id, event)
+              server.start_loop(event) unless server.playing
             end
-
-            server.start_loop(event) unless server.playing
-            nil
           else
             'First make me join your voice channel by using `join` command.'
           end
