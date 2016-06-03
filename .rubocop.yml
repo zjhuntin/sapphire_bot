@@ -16,6 +16,8 @@ Lint/Eval:
   Enabled: false
 ClassLength:
   Enabled: false
+MutableConstant:
+  Enabled: false
 
 AllCops:
   TargetRubyVersion: 2.2

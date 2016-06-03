@@ -4,7 +4,7 @@ module SapphireBot
       attr_reader :title, :duration, :path, :url, :ready, :valid
 
       def initialize(video_id, path)
-        download_options = DOWNLOAD_OPTIONS
+        download_options = DOWNLOAD_OPTIONS.clone
         download_options[:output] = "#{path}/%(title)s.mp3"
 
         @youtube_dl = YoutubeDL::Video.new(video_id, download_options)
