@@ -26,6 +26,7 @@ module SapphireBot
             if server.add_to_queue(video_id, event)
               server.start_loop(event) unless server.playing
             end
+            nil
           else
             'First make me join your voice channel by using `join` command.'
           end
