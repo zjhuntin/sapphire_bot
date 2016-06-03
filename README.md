@@ -106,12 +106,13 @@ After you've done with configuration, invite url should pop up, use it to make t
 ### Updating
 
   `$ git pull`
+  
   `$ bundle install`
 
 ### Debugging
 
   Run the bot with `-debug` command line option:
-  
+
   `$ ./run -debug`
 
 ### Contributing
