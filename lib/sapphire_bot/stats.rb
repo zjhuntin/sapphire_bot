@@ -41,10 +41,10 @@ module SapphireBot
     end
 
     def inspect
-      LOGGER.debug "Users: #{@users}"
-      LOGGER.debug "Servers: #{@servers}"
-      LOGGER.debug "Uptime: #{@uptime}"
-      @stats.each { |key, value| LOGGER.debug "#{key.to_s.tr('_', ' ').capitalize}: #{value} " }
+      LOGGER.info "Users: #{@users}"
+      LOGGER.info "Servers: #{@servers}"
+      LOGGER.info "Uptime: #{@uptime}"
+      @stats.each { |key, value| LOGGER.info "#{key.to_s.tr('_', ' ').capitalize}: #{value} " }
     end
 
     private
@@ -66,7 +66,6 @@ module SapphireBot
         loop do
           update
           save
-          inspect
           sleep(60)
         end
       end

@@ -48,9 +48,11 @@ module SapphireBot
   BOT.include! Events::ReadyMessage
 
   Thread.new do
-    LOGGER.info 'Type exit to safely stop the bot'
+    LOGGER.info 'Type "exit" to safely stop the bot or "inspect" to see bot statistics'
     loop do
-      next unless gets.chomp.casecmp('exit').zero?
+      input = gets.chomp
+      STATS.inspect if input == 'inspect'
+      next unless input == 'exit'
       LOGGER.info 'Exiting...'
       STATS.save
       ServerConfig.save
