@@ -1,5 +1,3 @@
-# Edited version of discordrb logger
-
 module SapphireBot
   # The format log timestamps should be in, in strftime format
   LOG_TIMESTAMP_FORMAT = '%Y-%m-%d-%H:%M:%S'.freeze
