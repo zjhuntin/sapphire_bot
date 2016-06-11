@@ -8,8 +8,6 @@ module SapphireBot
 
   STATS = Stats.new
 
-  BOT.bucket(:roasted, delay: 3000)
-
   BOT.include! Commands::Announce
   BOT.include! Commands::Delete
   BOT.include! Commands::Flip
