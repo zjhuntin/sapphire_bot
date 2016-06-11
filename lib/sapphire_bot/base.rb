@@ -1,11 +1,9 @@
 module SapphireBot
-  GOOGLE = GoogleServices.new
-
   BOT = Discordrb::Commands::CommandBot.new(token: CONFIG.discord_token,
                                             application_id: CONFIG.discord_client_id,
                                             prefix: CONFIG.prefix,
                                             advanced_functionality: false)
-
+  GOOGLE = GoogleServices.new
   STATS = Stats.new
 
   BOT.include! Commands::Announce
