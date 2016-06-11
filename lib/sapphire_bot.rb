@@ -10,7 +10,6 @@ require 'terminal-table'
 require_relative 'sapphire_bot/logger'
 
 # Supresses warning: already initialized constant Discordrb::LOGGER
-
 original_verbosity = $VERBOSE
 $VERBOSE = nil
 
@@ -24,13 +23,11 @@ Discordrb::LOGGER = LOGGER = if debug
 $VERBOSE = original_verbosity
 
 # Requires logger
-
 require_relative 'sapphire_bot/version'
 require_relative 'sapphire_bot/other/helpers'
 require_relative 'sapphire_bot/other/store_data'
 
 # Requires store_data
-
 require_relative 'sapphire_bot/stats'
 require_relative 'sapphire_bot/server_config'
 require_relative 'sapphire_bot/config'
@@ -38,7 +35,6 @@ require_relative 'sapphire_bot/config'
 CONFIG = SapphireBot::Config.new
 
 # Requires config
-
 require_relative 'sapphire_bot/google_services'
 
 Dir["#{File.dirname(__FILE__)}/sapphire_bot/commands/*.rb"].each { |file| require file }
@@ -53,7 +49,6 @@ if CONFIG.music_bot
 end
 
 # Requires server_config
-
 require_relative 'discordrb/server'
 
 require_relative 'sapphire_bot/base'
