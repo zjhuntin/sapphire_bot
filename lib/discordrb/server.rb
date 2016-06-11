@@ -1,7 +1,6 @@
 module Discordrb
   class Server
     include SapphireBot::Helpers
-    attr_reader :config
 
     old_initialize = instance_method(:initialize)
     define_method(:initialize) do |data, bot, exists = true|
