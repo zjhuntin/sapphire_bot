@@ -79,7 +79,7 @@ You can find me (@PoVa, ID109268519115329536) on this server: https://discord.gg
 * Tests
 
 ### Installing and running
-1. Make sure you have `git` and `bundler` installed, then
+1. Make sure you have `git` and `bundler` gem installed, then
 
    `$ git clone https://github.com/PoVa/sapphire_bot.git`
 
@@ -97,16 +97,27 @@ You can find me (@PoVa, ID109268519115329536) on this server: https://discord.gg
 
   `$ bundle install --without development music`
 
-4. Run the bot.
+6. Run the bot.
 
-   `$ ./run`
+  * Linux:
+
+      `$ ./run`
+
+  * Windows:
+
+      Just double click `run.bat` icon, you peasant.
+
+  * Literally anywhere:
+
+      `$ ruby run.rb`
+
 
 After you've done with configuration, invite url should pop up, use it to make the bot join your server.
 
 ### Updating
 
   `$ git pull`
-  
+
   `$ bundle install`
 
 ### Debugging
