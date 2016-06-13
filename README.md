@@ -101,7 +101,7 @@ You can find me (@PoVa, ID109268519115329536) on this server: https://discord.gg
 
   * Linux:
 
-      `$ ./run`
+      `$ ./run.sh`
 
   * Windows:
 
