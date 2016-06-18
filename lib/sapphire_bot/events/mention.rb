@@ -1,5 +1,6 @@
 module SapphireBot
   module Events
+    # Responds on mention.
     module Mention
       extend Discordrb::EventContainer
       mention do |event|

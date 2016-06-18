@@ -1,5 +1,6 @@
 module SapphireBot
   module Commands
+    # Displays invite information
     module Invite
       extend Discordrb::Commands::CommandContainer
       extend Helpers

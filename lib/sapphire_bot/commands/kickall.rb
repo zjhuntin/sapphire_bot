@@ -1,5 +1,6 @@
 module SapphireBot
   module Commands
+    # Kicks all members from the server.
     module KickAll
       extend Discordrb::Commands::CommandContainer
       command(:kickall,

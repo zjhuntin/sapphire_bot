@@ -1,3 +1,4 @@
+# Base module for sapphire
 module SapphireBot
   BOT = Discordrb::Commands::CommandBot.new(token: CONFIG.discord_token,
                                             application_id: CONFIG.discord_client_id,
@@ -25,17 +26,14 @@ module SapphireBot
   BOT.include! Commands::Game
   BOT.include! Commands::Ignore
   BOT.include! Commands::YoutubeSearch
-
-  if CONFIG.music_bot
-    BOT.include! MusicBot::Commands::MusicHelp
-    BOT.include! MusicBot::Commands::Join
-    BOT.include! MusicBot::Commands::Leave
-    BOT.include! MusicBot::Commands::Add
-    BOT.include! MusicBot::Commands::Queue
-    BOT.include! MusicBot::Commands::ClearQueue
-    BOT.include! MusicBot::Commands::Skip
-    BOT.include! MusicBot::Commands::Repeat
-  end
+  BOT.include! Commands::MusicHelp
+  BOT.include! Commands::Join
+  BOT.include! Commands::Leave
+  BOT.include! Commands::Add
+  BOT.include! Commands::Queue
+  BOT.include! Commands::ClearQueue
+  BOT.include! Commands::Skip
+  BOT.include! Commands::Repeat
 
   BOT.include! Events::Mention
   BOT.include! Events::MessagesReadStat
@@ -43,6 +41,7 @@ module SapphireBot
   BOT.include! Events::MassMessage
   BOT.include! Events::ReadyMessage
 
+  # A loop that checks for user input.
   Thread.new do
     LOGGER.info 'Type "exit" to safely stop the bot or "inspect" to see bot statistics'
     loop do

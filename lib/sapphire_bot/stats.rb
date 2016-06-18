@@ -1,4 +1,5 @@
 module SapphireBot
+  # Stores bot statistics.
   class Stats
     include StoreData
 
@@ -49,6 +50,7 @@ module SapphireBot
 
     private
 
+    # Creates get and set methods from hash keys.
     def create_methods
       @stats.keys.each do |key|
         self.class.send(:define_method, key) do
@@ -61,6 +63,7 @@ module SapphireBot
       end
     end
 
+    # Starts a loop that updates and saves stats every 60 seconds.
     def start_loop
       Thread.new do
         loop do

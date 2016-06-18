@@ -1,4 +1,5 @@
 module SapphireBot
+  # TODO: Get rid of this somehow.
   module Helpers
     def time_in_words(time)
       days = (time / 86_400).to_i
@@ -16,6 +17,7 @@ module SapphireBot
       'off'
     end
 
+    # Detects urls in text and shortens them with goo.gl url shortener
     # Can be called as shorten(event) (if event is Discordrb::Events::MessageEvent or Discordrb::Events::PrivateMessageEvent)
     #               or shorten(text, attributes)
     def shorten_text(var, preview: true, original: true, minlength: 21)

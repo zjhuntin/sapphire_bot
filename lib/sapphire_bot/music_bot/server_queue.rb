@@ -1,9 +1,18 @@
 module SapphireBot
   module MusicBot
+    # A class that keeps track of server queue.
     class ServerQueue
-      attr_accessor :repeat, :skip
+      # Loops current song if set to true.
+      attr_accessor :repeat
 
-      attr_reader :id, :queue, :playing
+      # Skips to the next song, even if repeat is set to true.
+      attr_accessor :skip
+
+      # Id of server.
+      attr_reader :id
+
+      # Whether music is currently being played..
+      attr_reader :playing
 
       def initialize(id)
         @id = id
@@ -16,7 +25,8 @@ module SapphireBot
         delete_dir if Dir.exist?(@server_dir)
       end
 
-      def add_to_queue(video_id, event)
+      # Downloads the song and returns true if it succeeded.
+      def add(video_id, event)
         song = Song.new(video_id, @server_dir)
         if song.valid
           event.respond("Downloading \"#{song.title}\".")
@@ -34,6 +44,7 @@ module SapphireBot
         end
       end
 
+      # Starts a loop, which plays the first song from queue if it's available, or waits until it is.
       def start_loop(event)
         unless @playing || @queue.first.nil?
           @playing = true
@@ -50,6 +61,7 @@ module SapphireBot
         end
       end
 
+      # Returns server queue table.
       def table
         Terminal::Table.new(headings: %w(# Name Duration Link)) do |t|
           @queue.each_with_index do |song, index|
@@ -65,6 +77,7 @@ module SapphireBot
         end
       end
 
+      # Deletes entire directory where songs are kept for this server.
       def delete_dir
         FileUtils.rm_rf(@server_dir)
         @queue = []
@@ -75,8 +88,23 @@ module SapphireBot
         @queue.delete_at(index)
       end
 
+      def playing?
+        @playing
+      end
+
+      # Returns length of the queue
+      def length
+        @queue.length
+      end
+
+      # Check if queue is empty
+      def empty?
+        @queue.empty?
+      end
+
       private
 
+      # Plays a song and keeps looping it if @repeat is set to true. Deletes it after it has finished.
       def play_song(song, event)
         event.respond("Playing \"#{song.title}\" (#{song.duration_formated}) #{song.url}")
         LOGGER.debug "Playing a song (#{song.inspect}), repeating: #{@repeat}"
@@ -90,6 +118,7 @@ module SapphireBot
         end
       end
 
+      # Waits until song is available to play or returns false if it takes too long.
       def wait_for_song(song, event)
         retries = 0
         loop do
@@ -109,6 +138,7 @@ module SapphireBot
         delete_song(@queue.first)
       end
 
+      # Finds the song in queue and deletes it.
       def delete_song(song)
         @queue.find { |x| x == song }.delete_file
         @queue.delete(song)

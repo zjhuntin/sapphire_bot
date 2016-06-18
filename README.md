@@ -7,6 +7,8 @@ A simple bot for discord made with [discordrb](https://github.com/meew0/discordr
 
 ### Features
 
+* Youtube music bot! Join a voice channel, use the `join` command and add songs with `add <song name>` command.
+
 * Automatic link shortening with https://goo.gl/. Whenever a link within a message is detected, the message gets replaced and all its links shortened. Example:
 
   `PoVa: look at his dank maymay m8: http://img.ifcdn.com/images/a52e08ff36a62190f8259a6b5e9aa2f9f9a86bb841bc6b01aa6cbacc7bbe846f_1.jpg`
@@ -91,11 +93,13 @@ You can find me (@PoVa, ID109268519115329536) on this server: https://discord.gg
 
   `sudo apt-get install libav-tools`
 
-4. (optional) Remove `music` from command in the following step.
+4. Run `bundle install`
 
-5. Run `bundle install`
+  `$ bundle install --without development`
 
-  `$ bundle install --without development music`
+5. (Windows only) Uncomment and modify this line in `run.rb` file:
+
+  `#::RBNACL_LIBSODIUM_GEM_LIB_PATH = "PATH TO LIBSODIUM"`
 
 6. Run the bot.
 

@@ -11,6 +11,8 @@ module SapphireBot
       self.mode = mode
       time = Time.now.strftime(LOG_TIMESTAMP_FORMAT)
       @log_file = "#{Dir.pwd}/logs/#{time}.log"
+
+      # Modes that should be saved to log file.
       @log_modes = [:warn, :error]
     end
 
@@ -57,7 +59,6 @@ module SapphireBot
     end
 
     # Logs an exception to the console.
-    # @param e [Exception] The exception to log.
     def log_exception(e)
       error(e.inspect)
       e.backtrace.each { |line| error(line) }

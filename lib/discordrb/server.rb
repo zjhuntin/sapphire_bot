@@ -1,11 +1,18 @@
 module Discordrb
+  # Add functionality needed for sapphire to Discordrb::Server.
   class Server
     include SapphireBot::Helpers
+
+    # Server music queue.
+    attr_reader :queue
+
+    attr_reader :config
 
     old_initialize = instance_method(:initialize)
     define_method(:initialize) do |data, bot, exists = true|
       old_initialize.bind(self).call(data, bot, exists)
       @config = SapphireBot::ServerConfig.load_config(@id)
+      @queue = SapphireBot::MusicBot::ServerQueue.new(@id)
       create_methods
     end
 

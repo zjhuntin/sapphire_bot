@@ -1,4 +1,5 @@
 module SapphireBot
+  # Holds sapphire configuration.
   class Config
     include StoreData
 
@@ -36,14 +37,6 @@ module SapphireBot
       puts 'Enter your permissions code. Press enter for default (66321471)'
       @config[:permissions_code] = gets.chomp
       @config[:permissions_code] = 66321471 if @config[:permissions_code].empty?
-
-      puts 'Enable music bot features? (y/n)'
-      @config[:music_bot] = if gets.chomp == 'y'
-                              true
-                            else
-                              false
-                            end
-
       save
     end
 

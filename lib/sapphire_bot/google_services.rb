@@ -1,4 +1,5 @@
 module SapphireBot
+  # Shortens links and finds videos from youtube.
   class GoogleServices
     include StoreData
     include Helpers

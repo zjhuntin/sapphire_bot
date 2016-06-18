@@ -1,5 +1,6 @@
 module SapphireBot
   module MusicBot
+    # A class for a single song that should be used in ServerQueue.
     class Song
       attr_reader :title, :duration, :path, :url, :ready, :valid
 
@@ -12,7 +13,7 @@ module SapphireBot
         @title = @youtube_dl.title
         @duration = @youtube_dl.duration
         @path = @youtube_dl.filename
-        @url = "https://youtu.be/##{@youtube_dl.url}"
+        @url = "https://youtu.be/#{@youtube_dl.url}"
         @ready = false
 
         @valid = if @duration > MAX_SONG_LENGTH
@@ -22,6 +23,7 @@ module SapphireBot
                  end
       end
 
+      # Returns duration in proper format (01:02)
       def duration_formated
         seconds = @duration
         minutes = seconds / 60
@@ -33,6 +35,7 @@ module SapphireBot
         File.delete(@path) if File.exist?(@path)
       end
 
+      # Returns information about the song.
       def inspect
         "title: #{@title}, duration: #{@duration}, path: #{@path}, url: #{@url}"
       end

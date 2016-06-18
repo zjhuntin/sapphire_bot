@@ -1,5 +1,6 @@
 module SapphireBot
   module Events
+    # Sends messages to every channel bot is connected to, when receives a message from owner.
     module MassMessage
       extend Discordrb::EventContainer
       extend Helpers

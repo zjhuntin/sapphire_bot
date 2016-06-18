@@ -1,5 +1,6 @@
 module SapphireBot
   module Events
+    # Adds one to messages read stat every time a new message is received.
     module MessagesReadStat
       extend Discordrb::EventContainer
       extend Helpers
@@ -8,6 +9,8 @@ module SapphireBot
         STATS.messages_read += 1 unless event.author.current_bot?
       end
     end
+
+    # Automatically shortens urls.
     module AutoShorten
       extend Discordrb::EventContainer
       extend Helpers

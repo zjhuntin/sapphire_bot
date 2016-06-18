@@ -1,11 +1,13 @@
 require 'uri'
 require 'yaml'
 require 'fileutils'
+require 'open-uri'
 
 require 'google/apis/youtube_v3'
 require 'google/apis/urlshortener_v1'
 require 'discordrb'
 require 'terminal-table'
+require 'youtube-dl.rb'
 
 require_relative 'sapphire_bot/logger'
 
@@ -37,16 +39,11 @@ CONFIG = SapphireBot::Config.new
 # Requires config
 require_relative 'sapphire_bot/google_services'
 
-Dir["#{File.dirname(__FILE__)}/sapphire_bot/commands/*.rb"].each { |file| require file }
-Dir["#{File.dirname(__FILE__)}/sapphire_bot/events/*.rb"].each { |file| require file }
-
-if CONFIG.music_bot
-  require 'youtube-dl.rb'
-  require_relative 'sapphire_bot/music_bot/song'
-  require_relative 'sapphire_bot/music_bot/server_queue'
-  require_relative 'sapphire_bot/music_bot/music_bot'
-  Dir["#{File.dirname(__FILE__)}/sapphire_bot/music_bot/commands/*.rb"].each { |file| require file }
-end
+require_relative 'sapphire_bot/music_bot/song'
+require_relative 'sapphire_bot/music_bot/server_queue'
+require_relative 'sapphire_bot/music_bot'
+require_relative 'sapphire_bot/commands'
+require_relative 'sapphire_bot/events'
 
 # Requires server_config
 require_relative 'discordrb/server'
