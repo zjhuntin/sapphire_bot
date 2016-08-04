@@ -12,7 +12,7 @@ module SapphireBot
           event.server.queue.delete_dir
         elsif argument.to_i.between?(1, event.server.queue.length)
           index = argument.to_i - 1
-          if index == 0
+          if index.zero?
             event.voice.stop_playing
             event.server.queue.first.repeat = false
           else

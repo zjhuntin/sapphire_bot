@@ -1,5 +1,5 @@
 module SapphireBot
-  # TODO: Get rid of this somehow.
+  # Get rid of this somehow.
   module Helpers
     def time_in_words(time)
       days = (time / 86_400).to_i

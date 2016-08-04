@@ -1,5 +1,5 @@
 module SapphireBot
-  # TODO: Get rid of this shit.
+  # Get rid of this shit.
   module StoreData
     # Serializes an object and saves it to file.
     def save_to_file(file, object)
