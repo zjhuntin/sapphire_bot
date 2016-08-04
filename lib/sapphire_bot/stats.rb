@@ -41,13 +41,6 @@ module SapphireBot
       save_to_file(@file, @stats)
     end
 
-    def inspect
-      LOGGER.info "Users: #{@users}"
-      LOGGER.info "Servers: #{@servers}"
-      LOGGER.info "Uptime: #{@uptime}"
-      @stats.each { |key, value| LOGGER.info "#{key.to_s.tr('_', ' ').capitalize}: #{value} " }
-    end
-
     private
 
     # Creates get and set methods from hash keys.
