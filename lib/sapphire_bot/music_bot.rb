@@ -1,4 +1,7 @@
 module SapphireBot
+  # Load other MusicBot files.
+  Dir["#{File.dirname(__FILE__)}/music_bot/*.rb"].each { |file| require file }
+
   # Contains classes and information for music bot features.
   module MusicBot
     # Maximum length of a song in seconds.
