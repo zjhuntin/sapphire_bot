@@ -20,7 +20,7 @@ module SapphireBot
 
     def self.delete_files
       BOT.servers.each do |_id, server|
-        server.delete_dir
+        server.queue.delete_dir
       end
     end
   end
