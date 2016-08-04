@@ -41,21 +41,15 @@ module SapphireBot
   BOT.include! Events::MassMessage
   BOT.include! Events::ReadyMessage
 
-  # A loop that checks for user input.
-  Thread.new do
-    LOGGER.info 'Type "exit" to safely stop the bot or "inspect" to see bot statistics'
-    loop do
-      input = gets.chomp
-      STATS.inspect if input == 'inspect'
-      next unless input == 'exit'
-      LOGGER.info 'Exiting...'
-      STATS.save
-      ServerConfig.save
-      MusicBot.delete_files
-      exit
-    end
+  at_exit do
+    LOGGER.info "Saving files and deleting songs before exiting..."
+    STATS.save
+    ServerConfig.save
+    MusicBot.delete_files
+    exit!
   end
 
   LOGGER.info "Oauth url: #{BOT.invite_url}+&permissions=#{CONFIG.permissions_code}"
+  LOGGER.info "Use ctrl+c to safely stop the bot."
   BOT.run
 end
