@@ -4,8 +4,8 @@ module SapphireBot
     include StoreData
 
     def initialize
-      file = "#{Dir.pwd}/data/config.yml"
-      temp = load_file(file)
+      @file = "#{Dir.pwd}/data/config.yml"
+      temp = load_file(@file)
       @config = temp if temp.is_a?(Hash) && !temp.empty?
       setup_config if @config.nil?
       create_methods
