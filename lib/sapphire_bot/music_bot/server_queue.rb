@@ -29,11 +29,13 @@ module SapphireBot
       def add(video_id, event)
         song = Song.new(video_id, @server_dir)
         if song.valid
-          event.respond("Downloading \"#{song.title}\".")
+          message = event.respond("Downloading \"#{song.title}\".")
           @queue << song
           if song.download
+            message.delete
             true
           else
+            message.delete
             @queue.delete(song)
             event.respond("There was a problem downloading \"#{song.title}\"")
             false
@@ -106,10 +108,11 @@ module SapphireBot
 
       # Plays a song and keeps looping it if @repeat is set to true. Deletes it after it has finished.
       def play_song(song, event)
-        event.respond("Playing \"#{song.title}\" (#{song.duration_formated}) #{song.url}")
+        message = event.respond("Playing \"#{song.title}\" (#{song.duration_formated}) #{song.url}")
         LOGGER.debug "Playing a song (#{song.inspect}), repeating: #{@repeat}"
         loop do
           event.voice.play_file(song.path)
+          message.delete
           STATS.songs_played += 1
           next if @repeat && !@skip
           @skip = false
