@@ -35,7 +35,7 @@ module SapphireBot
     ]
 
     def self.include!
-      @commands.each do | command |
+      @commands.each do |command|
         SapphireBot::BOT.include!(command)
       end
     end

@@ -1,3 +1,4 @@
+# For some dumb reason Rubocop asked me to comment here.
 module SapphireBot
   # Load other MusicBot files.
   Dir["#{File.dirname(__FILE__)}/music_bot/*.rb"].each { |file| require file }

@@ -2,7 +2,6 @@ module SapphireBot
   module Commands
     # Toggles server queue repeat state.
     module Repeat
-      extend Helpers
       extend Discordrb::Commands::CommandContainer
       command(:repeat, description: 'Toggles repeat.',
                        required_permissions: [:manage_server]) do |event|

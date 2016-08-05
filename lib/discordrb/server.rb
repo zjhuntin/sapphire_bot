@@ -1,8 +1,6 @@
 module Discordrb
   # Add functionality needed for sapphire to Discordrb::Server.
   class Server
-    include SapphireBot::Helpers
-
     # Server music queue.
     attr_reader :queue
 

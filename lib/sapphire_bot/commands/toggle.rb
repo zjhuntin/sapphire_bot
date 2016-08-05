@@ -2,7 +2,6 @@ module SapphireBot
   module Commands
     # Toggles bot settings server-wide.
     module Toggle
-      extend Helpers
       extend Discordrb::Commands::CommandContainer
       command(:toggle, description: 'Allows you to toggle different bot settings server-wide.',
                        usage: 'toggle <setting>',

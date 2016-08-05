@@ -13,7 +13,7 @@ module SapphireBot
     ]
 
     def self.include!
-      @events.each do | event |
+      @events.each do |event|
         SapphireBot::BOT.include!(event)
       end
     end

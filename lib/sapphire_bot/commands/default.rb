@@ -3,7 +3,6 @@ module SapphireBot
     # Resets a single or all messages to default.
     module Default
       extend Discordrb::Commands::CommandContainer
-      extend Helpers
       command(:default, description: 'Resets server setting (or all settings) to default',
                         usage: 'default <setting/all>',
                         required_permissions: [:manage_server],

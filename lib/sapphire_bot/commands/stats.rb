@@ -2,7 +2,6 @@ module SapphireBot
   module Commands
     # Prints bot statistics.
     module Stats
-      extend Helpers
       extend Discordrb::Commands::CommandContainer
       command(:stats, description: 'Shows bot statistics') do |event|
         ping = ((Time.now - event.timestamp) * 1000).to_i

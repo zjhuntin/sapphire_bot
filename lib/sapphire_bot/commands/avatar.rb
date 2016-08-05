@@ -2,7 +2,6 @@ module SapphireBot
   module Commands
     # Sets avatar of a bot.
     module Avatar
-      extend Helpers
       extend Discordrb::Commands::CommandContainer
       command(:avatar, usage: 'avatar <url>', min_args: 1,
                        description: 'Sets avatar of this bot.') do |event, url|

@@ -3,14 +3,13 @@ module SapphireBot
     # Generates a lmgtfy link.
     module Lmgtfy
       extend Discordrb::Commands::CommandContainer
-      extend Helpers
       command(:lmgtfy, min_args: 1,
                        description: 'Generates Let Me Goole That For You link.',
                        usage: 'lmgtfy <text>') do |event, *text|
-        shorten_text("http://lmgtfy.com/?q=#{text.join('+')}",
-                     preview: event.server.preview,
-                     original: event.server.original,
-                     minlength: event.server.minlength)
+        GOOGLE.shorten_text("http://lmgtfy.com/?q=#{text.join('+')}",
+                            preview: event.server.preview,
+                            original: event.server.original,
+                            minlength: event.server.minlength)
       end
     end
   end
