@@ -21,10 +21,10 @@ module SapphireBot
         end
 
         # Set voice object that should be used for playback.
-        event.server.queue.voice = event.voice
+        event.server.music_player.voice = event.voice
 
         # Set channel that should be used for bot responses.
-        event.server.queue.channel = event.channel
+        event.server.music_player.channel = event.channel
 
         LOGGER.debug "Music bot joined #{event.channel.id}."
         "Joined \"#{channel.name}\". Use `add` command if you want to add songs to queue."

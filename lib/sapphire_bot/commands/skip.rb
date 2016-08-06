@@ -5,9 +5,9 @@ module SapphireBot
       extend Discordrb::Commands::CommandContainer
       command(:skip, description: 'Skips current song.',
                      required_permissions: [:manage_server]) do |event|
-        break if event.server.queue.empty? || !event.server.queue.playing?
+        break if event.server.music_player.queue.empty? || !event.server.music_player.playing?
 
-        event.server.queue.skip = true
+        event.server.music_player.skip = true
         event.voice.stop_playing if event.voice
         nil
       end

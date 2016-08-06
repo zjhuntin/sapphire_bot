@@ -7,8 +7,8 @@ module SapphireBot
                     usage: 'add <query>', min_args: 1) do |event, *query|
         if !event.voice
           next 'First make me join your voice channel by using `join` command.'
-        elsif event.server.queue.length >= MusicBot::MAX_SONGS_IN_QUEUE
-          next 'Queue is too long.'
+        elsif event.server.music_player.queue.length >= MusicBot::MAX_SONGS_IN_QUEUE
+          next 'Music music queue is too long.'
         end
 
         # Find the video and let user know if it does not exist.
@@ -18,8 +18,8 @@ module SapphireBot
 
         # Download the song and add it to queue.
         # If this succeeds then start playing it unless music is already being played.
-        if event.server.queue.add(video_id)
-          event.server.queue.start_loop unless event.server.queue.playing?
+        if event.server.music_player.add(video_id)
+          event.server.music_player.start_loop unless event.server.music_player.playing?
         end
         nil
       end

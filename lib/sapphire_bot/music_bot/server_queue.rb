@@ -1,7 +1,7 @@
 module SapphireBot
   module MusicBot
-    # A class that keeps track of server queue.
-    class ServerQueue
+    # A class for playing and managing music.
+    class MusicPlayer
       # Loops current song if set to true.
       attr_accessor :repeat
 
@@ -19,6 +19,9 @@ module SapphireBot
 
       # Voice object that should be ued for playback.
       attr_accessor :voice
+
+      # An array that holds songs.
+      attr_reader :queue
 
       def initialize(id)
         @id = id
@@ -60,7 +63,7 @@ module SapphireBot
           loop do
             LOGGER.debug "Started music loop for server #{@id}"
             if @queue.empty?
-              respond('Queue is empty, add more songs with `add` command.')
+              respond('Music player is empty, add more songs with `add` command.')
               break
             end
             song = @queue.first
@@ -99,16 +102,6 @@ module SapphireBot
 
       def playing?
         @playing
-      end
-
-      # Returns length of the queue
-      def length
-        @queue.length
-      end
-
-      # Check if queue is empty
-      def empty?
-        @queue.empty?
       end
 
       # Destroys voice connection and deletes all files. Informs the user if message is specified.
@@ -160,7 +153,7 @@ module SapphireBot
         delete_song(@queue.first)
       end
 
-      # Finds the song in queue and deletes it.
+      # Finds a song in the queue and deletes it.
       def delete_song(song)
         @queue.find { |x| x == song }.delete_file
         @queue.delete(song)

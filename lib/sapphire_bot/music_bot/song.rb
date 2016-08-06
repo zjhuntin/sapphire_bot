@@ -1,6 +1,6 @@
 module SapphireBot
   module MusicBot
-    # A class for a single song that should be used in ServerQueue.
+    # A class for a single song that. Used in SapphireBot::MusicBot::MusicPlayer.
     class Song
       attr_reader :title, :duration, :path, :url, :ready, :valid
 

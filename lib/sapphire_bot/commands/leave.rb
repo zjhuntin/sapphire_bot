@@ -5,7 +5,7 @@ module SapphireBot
       extend Discordrb::Commands::CommandContainer
       command(:leave, description: 'Makes the bot leave your voice channel.',
                       required_permissions: [:manage_server]) do |event|
-        event.server.queue.disconnect
+        event.server.music_player.disconnect
         nil
       end
     end

@@ -1,13 +1,13 @@
 module SapphireBot
   module Commands
-    # Prints server music queue.
+    # Prints server's music queue.
     module Queue
       extend Discordrb::Commands::CommandContainer
       command(:queue, description: 'Displays current music queue.') do |event|
-        if event.server.queue.empty?
+        if event.server.music_player.queue.empty?
           'Queue is empty, use `add` to add more songs.'
         else
-          "`#{event.server.queue.table}`"
+          "`#{event.server.music_player.table}`"
         end
       end
     end
