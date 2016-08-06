@@ -11,8 +11,14 @@ module SapphireBot
       # Id of server.
       attr_reader :id
 
-      # Whether music is currently being played..
+      # Whether music is currently being played.
       attr_reader :playing
+
+      # Text channel that should be used for bot responses.
+      attr_accessor :channel
+
+      # Voice object that should be ued for playback.
+      attr_accessor :voice
 
       def initialize(id)
         @id = id
@@ -26,10 +32,10 @@ module SapphireBot
       end
 
       # Downloads the song and returns true if it succeeded.
-      def add(video_id, event)
+      def add(video_id)
         song = Song.new(video_id, @server_dir)
-        if song.valid
-          message = event.respond("Downloading \"#{song.title}\".")
+        if valid_song?(song) && unique_song?(song)
+          message = respond("Downloading \"#{song.title}\".")
           @queue << song
           if song.download
             message.delete
@@ -37,27 +43,26 @@ module SapphireBot
           else
             message.delete
             @queue.delete(song)
-            event.respond("There was a problem downloading \"#{song.title}\"")
+            respond("There was a problem downloading \"#{song.title}\"")
             false
           end
         else
-          event.respond("The song is too long. Maximum length is #{MAX_SONG_LENGTH} seconds.")
           false
         end
       end
 
       # Starts a loop, which plays the first song from queue if it's available, or waits until it is.
-      def start_loop(event)
+      def start_loop
         unless @playing || @queue.first.nil?
           @playing = true
           loop do
             LOGGER.debug "Started music loop for server #{@id}"
             if @queue.empty?
-              event.respond('Queue is empty, add more songs with `add` command.')
+              respond('Queue is empty, add more songs with `add` command.')
               break
             end
             song = @queue.first
-            play_song(song, event) if song.ready || wait_for_song(song, event)
+            play_song(song) if song.ready || wait_for_song(song)
           end
           @playing = false
         end
@@ -107,11 +112,11 @@ module SapphireBot
       private
 
       # Plays a song and keeps looping it if @repeat is set to true. Deletes it after it has finished.
-      def play_song(song, event)
-        message = event.respond("Playing \"#{song.title}\" (#{song.duration_formated}) #{song.url}")
+      def play_song(song)
+        message = respond("Playing \"#{song.title}\" (#{song.duration_formated}) #{song.url}")
         LOGGER.debug "Playing a song (#{song.inspect}), repeating: #{@repeat}"
         loop do
-          event.voice.play_file(song.path)
+          @voice.play_file(song.path)
           message.delete
           STATS.songs_played += 1
           next if @repeat && !@skip
@@ -122,7 +127,7 @@ module SapphireBot
       end
 
       # Waits until song is available to play or returns false if it takes too long.
-      def wait_for_song(song, event)
+      def wait_for_song(song)
         retries = 0
         loop do
           LOGGER.debug "Waiting for song to be available on server #{@id} (#{song.inspect}) #{"(#{retries})" if retries > 0}"
@@ -131,7 +136,7 @@ module SapphireBot
             LOGGER.debug "Song was not available after #{retries} retries on server #{@id}. (#{song.inspect})"
             return false
           end
-          event.respond("\"#{song.title}\" is not ready yet, will start playing once it is.")
+          respond("\"#{song.title}\" is not ready yet, will start playing once it is.")
           retries += 1
           sleep(10)
         end
@@ -145,6 +150,32 @@ module SapphireBot
       def delete_song(song)
         @queue.find { |x| x == song }.delete_file
         @queue.delete(song)
+      end
+
+      # Checks if this song has already been added to the queue and inform the user if it has.
+      def unique_song?(song)
+        @queue.each do |song_from_queue|
+          if song_from_queue.url == song.url
+            respond('This song has already been added. Use `repeat` command to play songs multiple times.')
+            return false
+          end
+        end
+        true
+      end
+
+      # Checks if a song is valid and inform the user if it isn't.
+      def valid_song?(song)
+        if song.valid?
+          true
+        else
+          respond("The song is too long. Maximum length is #{MAX_SONG_LENGTH} seconds.")
+          false
+        end
+      end
+
+      # Sends a message to the channel that is used for bot responses.
+      def respond(message)
+        @channel.send_message(message)
       end
     end
   end

@@ -15,12 +15,6 @@ module SapphireBot
         @path = @youtube_dl.filename
         @url = "https://youtu.be/#{@youtube_dl.url}"
         @ready = false
-
-        @valid = if @duration > MAX_SONG_LENGTH
-                   false
-                 else
-                   true
-                 end
       end
 
       # Returns duration in proper format (01:02)
@@ -48,6 +42,11 @@ module SapphireBot
       else
         @ready = true
         true
+      end
+
+      # TODO: Add more checks.
+      def valid?
+        @duration < MAX_SONG_LENGTH
       end
     end
   end

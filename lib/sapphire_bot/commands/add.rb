@@ -18,8 +18,8 @@ module SapphireBot
 
         # Download the song and add it to queue.
         # If this succeeds then start playing it unless music is already being played.
-        if event.server.queue.add(video_id, event)
-          event.server.queue.start_loop(event) unless event.server.queue.playing?
+        if event.server.queue.add(video_id)
+          event.server.queue.start_loop unless event.server.queue.playing?
         end
         nil
       end
