@@ -5,9 +5,9 @@ module SapphireBot
       extend Discordrb::Commands::CommandContainer
       command(:yt, description: 'Finds youtube videos.', min_args: 1,
                    usage: 'yt <query>') do |event, *query|
-        video = 'https://youtu.be/' + GOOGLE.find_video(query.join(' '))
+        video = GOOGLE.find_video(query.join(' '))
         if video
-          "**#{event.author.username}**: #{video}"
+          "https://youtu.be/#{video}"
         else
           'Such video does not exist.'
         end

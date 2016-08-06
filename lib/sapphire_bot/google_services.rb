@@ -15,7 +15,7 @@ module SapphireBot
 
     def find_video(query)
       result = @youtube.list_searches('snippet', q: query, type: 'video', max_results: 1).items.first
-      return unless result
+      return nil unless result
       STATS.videos_found += 1
       LOGGER.debug "Searched for video \"#{query}\" and found #{result.id.video_id}"
       result.id.video_id
