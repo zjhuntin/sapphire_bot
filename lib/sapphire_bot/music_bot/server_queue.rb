@@ -106,7 +106,7 @@ module SapphireBot
 
       # Destroys voice connection and deletes all files. Informs the user if message is specified.
       def disconnect(message = nil)
-        voice.destroy
+        @voice.destroy
         delete_dir
         respond(message) if message
         @voice = nil
