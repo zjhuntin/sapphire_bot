@@ -65,6 +65,11 @@ module Kernel
   rescue
     nil
   end
+
+  # Generates a random string with default length of 10.
+  def rand_string(length = 10)
+    rand(36**length).to_s(36)
+  end
 end
 
 # Base module for sapphire.

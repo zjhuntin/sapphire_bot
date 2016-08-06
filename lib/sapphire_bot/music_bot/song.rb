@@ -6,7 +6,7 @@ module SapphireBot
 
       def initialize(video_id, path)
         download_options = DOWNLOAD_OPTIONS.clone
-        download_options[:output] = "#{path}/%(title)s.mp3"
+        download_options[:output] = "#{path}/%(title)s-#{rand_string}.mp3"
 
         @youtube_dl = YoutubeDL::Video.new(video_id, download_options)
 
