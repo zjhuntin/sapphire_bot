@@ -4,7 +4,7 @@ module SapphireBot
     module YoutubeSearch
       extend Discordrb::Commands::CommandContainer
       command(:yt, description: 'Finds youtube videos.', min_args: 1,
-                   usage: 'yt <query>') do |event, *query|
+                   usage: 'yt <query>') do |_event, *query|
         video = GOOGLE.find_video(query.join(' '))
         if video
           "https://youtu.be/#{video}"

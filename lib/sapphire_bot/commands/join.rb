@@ -17,7 +17,7 @@ module SapphireBot
           event.bot.voice_connect(channel)
           event.voice.encoder.use_avconv = true
         rescue Discordrb::Errors::NoPermission
-          next 'Please make sure I have permission to join this channel and try again.'
+          next 'Please make sure I have permission to join this channel.'
         end
 
         # Set voice object that should be used for playback.
@@ -27,7 +27,7 @@ module SapphireBot
         event.server.queue.channel = event.channel
 
         LOGGER.debug "Music bot joined #{event.channel.id}."
-        "Joined \"#{channel.name}\". Use `add` command if you want toadd songs to queue."
+        "Joined \"#{channel.name}\". Use `add` command if you want to add songs to queue."
       end
     end
   end

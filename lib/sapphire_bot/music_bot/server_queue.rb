@@ -29,6 +29,8 @@ module SapphireBot
         @server_dir = "#{Dir.pwd}/data/music_bot/#{id}"
 
         delete_dir if Dir.exist?(@server_dir)
+        # Start the timer.
+        afk_timer
       end
 
       # Downloads the song and returns true if it succeeded.
@@ -109,6 +111,18 @@ module SapphireBot
         @queue.empty?
       end
 
+      # Destroys voice connection and deletes all files. Informs the user if message is specified.
+      def disconnect(message = nil)
+        voice.destroy
+        delete_dir
+        respond(message) if message
+        @voice = nil
+        @channel = nil
+      rescue => e
+        LOGGER.error 'An error occured while trying to leave a server.'
+        LOGGER.log_exception e
+      end
+
       private
 
       # Plays a song and keeps looping it if @repeat is set to true. Deletes it after it has finished.
@@ -121,7 +135,7 @@ module SapphireBot
           STATS.songs_played += 1
           next if @repeat && !@skip
           @skip = false
-          delete_first_song
+          delete_first_song unless @queue.first.nil?
           break
         end
       end
@@ -175,7 +189,34 @@ module SapphireBot
 
       # Sends a message to the channel that is used for bot responses.
       def respond(message)
-        @channel.send_message(message)
+        @channel.send_message(message) if @channel
+      end
+
+      # Destroys voice connection after it has been inactive for more than 60 seconds.
+      def afk_timer
+        Thread.new do
+          tries = 0
+          loop do
+            # Reset tries to zero if something started plaing or voice there is no voice connection.
+            if @playing || @voice.nil?
+              tries = 0
+              sleep(10)
+              next
+            else
+              tries += 1
+            end
+
+            # Nothing was played for more than 60 seconds.
+            if tries >= 6
+              tries = 0
+              disconnect("You haven't been playing anything for too long. Next time use `leave` command after you've finished.")
+            else
+              sleep(10)
+            end
+          end
+
+          nil
+        end
       end
     end
   end
