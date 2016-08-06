@@ -12,7 +12,7 @@ module SapphireBot
           setting_info = SapphireBot::ServerConfig.settings_info[setting]
           if setting_info[:command] == :toggle
             event.server.update_config(setting => !event.server.config[setting])
-            "#{setting_info[:description]} is now #{bool_to_words(event.server.config[setting])}."
+            "#{setting_info[:description]} is now #{bool_to_words(event.server.config[setting], :enabled)}."
           else
             "Use `#{setting_info[:command]}` instead of `toggle` for this setting."
           end
