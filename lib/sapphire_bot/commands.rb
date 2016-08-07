@@ -21,7 +21,6 @@ module SapphireBot
       Set,
       Default,
       Settings,
-      Game,
       Ignore,
       YoutubeSearch,
       MusicHelp,

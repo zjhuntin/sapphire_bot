@@ -23,6 +23,8 @@ module SapphireBot
       # An array that holds songs.
       attr_reader :queue
 
+      @@servers_with_music_playing = 0
+
       def initialize(id)
         @id = id
         @queue = []
@@ -32,8 +34,9 @@ module SapphireBot
         @server_dir = "#{Dir.pwd}/data/music_bot/#{id}"
 
         delete_dir if Dir.exist?(@server_dir)
-        # Start the timer.
+
         afk_timer
+        game_status_loop
       end
 
       # Downloads the song and returns true if it succeeded.
@@ -124,11 +127,11 @@ module SapphireBot
         LOGGER.debug "Playing a song (#{song.inspect}), repeating: #{@repeat}"
         loop do
           @voice.play_file(song.path)
-          message.delete
           STATS.songs_played += 1
           next if @repeat && !@skip
           @skip = false
           delete_first_song unless @queue.first.nil?
+          message.delete
           break
         end
       end
@@ -188,20 +191,19 @@ module SapphireBot
       # Destroys voice connection after it has been inactive for more than 60 seconds.
       def afk_timer
         Thread.new do
-          tries = 0
+          counter = 0
           loop do
-            # Reset tries to zero if something started plaing or there is no voice connection.
+            # Reset counter to zero if something started plaing or there is no voice connection.
             if @playing || @voice.nil?
-              tries = 0
+              counter = 0
               sleep(10)
-              next
             else
-              tries += 1
+              counter += 1
             end
 
             # Nothing was played for more than 60 seconds.
-            if tries >= 6
-              tries = 0
+            if counter >= 6
+              counter = 0
               disconnect("You haven't been playing anything for too long. Next time use `leave` command after you've finished.")
             else
               sleep(10)
@@ -209,6 +211,32 @@ module SapphireBot
           end
 
           nil
+        end
+
+        # Updates Bot's game status with number of songs being played.
+        def game_status_loop
+          Thread.new do
+            # Make sure not to add of subtract multiple times.
+            last_action = :subtracted
+
+            loop do
+              if @playing && last_action != :added
+                @@servers_with_music_playing += 1
+                last_action = :added
+              elsif !@playing && last_action != :subtracted
+                @@servers_with_music_playing -= 1
+                last_action = :subtracted
+              end
+
+              if @@servers_with_music_playing > 0
+                BOT.game = "music on #{@@servers_with_music_playing} server#{'s' if @@servers_with_music_playing != 1}!"
+              else
+                BOT.game = nil
+              end
+
+              sleep(10)
+            end
+          end
         end
       end
     end

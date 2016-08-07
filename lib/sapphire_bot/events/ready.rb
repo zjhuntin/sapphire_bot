@@ -4,6 +4,7 @@ module SapphireBot
     module ReadyMessage
       extend Discordrb::EventContainer
       ready do
+        BOT.game = nil
         LOGGER.info 'Bot is ready'
       end
     end
