@@ -190,7 +190,7 @@ module SapphireBot
         Thread.new do
           tries = 0
           loop do
-            # Reset tries to zero if something started plaing or voice there is no voice connection.
+            # Reset tries to zero if something started plaing or there is no voice connection.
             if @playing || @voice.nil?
               tries = 0
               sleep(10)
