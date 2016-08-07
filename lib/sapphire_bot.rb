@@ -79,11 +79,11 @@ module SapphireBot
   # Set debug mode if command line arguments include "-debug".
   run_supressed do
     debug = ARGV.include?('-debug') ? true : false
-    Discordrb::LOGGER = SapphireBot::LOGGER = if debug
-                                                SapphireBot::Logger.new(:debug)
-                                              else
-                                                SapphireBot::Logger.new
-                                              end
+    Discordrb::LOGGER = LOGGER = if debug
+                                   SapphireBot::Logger.new(:debug)
+                                 else
+                                   SapphireBot::Logger.new
+                                 end
   end
 
   require_relative 'sapphire_bot/other/store_data'

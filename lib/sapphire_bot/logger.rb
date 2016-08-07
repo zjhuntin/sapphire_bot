@@ -10,10 +10,12 @@ module SapphireBot
     def initialize(mode = :normal)
       self.mode = mode
       time = Time.now.strftime(LOG_TIMESTAMP_FORMAT)
-      @log_file = "#{Dir.pwd}/logs/#{time}.log"
 
-      # Modes that should be saved to log file.
-      @log_modes = [:warn, :error]
+      if @enabled_modes.include?(:debug)
+        @log_file = "#{Dir.pwd}/logs/#{time}-debug.log"
+      else
+        @log_file = "#{Dir.pwd}/logs/#{time}.log"
+      end
     end
 
     # The modes this logger can have. This is probably useless unless you want to write your own Logger
@@ -46,15 +48,10 @@ module SapphireBot
     def mode=(value)
       case value
       when :debug
-        @enabled_modes = [:debug, :good, :info, :warn, :error, :out, :in]
-      when :verbose
-        @enabled_modes = [:good, :info, :warn, :error, :out, :in]
+        @log_modes = @enabled_modes = [:debug, :good, :info, :warn, :error, :out, :in]
       when :normal
+        @log_modes = [:warn, :error]
         @enabled_modes = [:info, :warn, :error]
-      when :quiet
-        @enabled_modes = [:warn, :error]
-      when :silent
-        @enabled_modes = []
       end
     end
 

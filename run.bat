@@ -1,1 +1,1 @@
-ruby run.rb
+ruby run.rb %*
