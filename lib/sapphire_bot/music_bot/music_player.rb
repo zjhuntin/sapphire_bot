@@ -212,30 +212,30 @@ module SapphireBot
 
           nil
         end
+      end
 
-        # Updates Bot's game status with number of songs being played.
-        def game_status_loop
-          Thread.new do
-            # Make sure not to add of subtract multiple times.
-            last_action = :subtracted
+      # Updates Bot's game status with number of songs being played.
+      def game_status_loop
+        Thread.new do
+          # Make sure not to add of subtract multiple times.
+          last_action = :subtracted
 
-            loop do
-              if @playing && last_action != :added
-                @@servers_with_music_playing += 1
-                last_action = :added
-              elsif !@playing && last_action != :subtracted
-                @@servers_with_music_playing -= 1
-                last_action = :subtracted
-              end
-
-              if @@servers_with_music_playing > 0
-                BOT.game = "music on #{@@servers_with_music_playing} server#{'s' if @@servers_with_music_playing != 1}!"
-              else
-                BOT.game = nil
-              end
-
-              sleep(10)
+          loop do
+            if @playing && last_action != :added
+              @@servers_with_music_playing += 1
+              last_action = :added
+            elsif !@playing && last_action != :subtracted
+              @@servers_with_music_playing -= 1
+              last_action = :subtracted
             end
+
+            BOT.game = if @@servers_with_music_playing > 0
+                         "music on #{@@servers_with_music_playing} server#{'s' if @@servers_with_music_playing != 1}!"
+                       else
+                         false
+                       end
+
+            sleep(10)
           end
         end
       end

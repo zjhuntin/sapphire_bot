@@ -11,11 +11,11 @@ module SapphireBot
       self.mode = mode
       time = Time.now.strftime(LOG_TIMESTAMP_FORMAT)
 
-      if @enabled_modes.include?(:debug)
-        @log_file = "#{Dir.pwd}/logs/#{time}-debug.log"
-      else
-        @log_file = "#{Dir.pwd}/logs/#{time}.log"
-      end
+      @log_file = if @enabled_modes.include?(:debug)
+                    "#{Dir.pwd}/logs/#{time}-debug.log"
+                  else
+                    "#{Dir.pwd}/logs/#{time}.log"
+                  end
     end
 
     # The modes this logger can have. This is probably useless unless you want to write your own Logger

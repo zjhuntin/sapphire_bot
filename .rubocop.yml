@@ -14,6 +14,8 @@ ClassLength:
   Enabled: false
 MutableConstant:
   Enabled: false
+ClassVars:
+  Enabled: false
 
 AllCops:
   TargetRubyVersion: 2.2
