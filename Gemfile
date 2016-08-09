@@ -6,5 +6,5 @@ gem 'youtube-dl.rb',        '~> 0.3.1'
 gem 'google-api-client',    '0.9.6'
 
 group :development do
-  gem 'rubocop', '0.39.2'
+  gem 'rubocop', '~> 0.42.0'
 end
