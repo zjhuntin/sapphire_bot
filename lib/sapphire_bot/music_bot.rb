@@ -15,7 +15,7 @@ module SapphireBot
     DOWNLOAD_OPTIONS = {
       extract_audio: true,
       audio_format: 'mp3',
-      format: :worst
+      format: :bestaudio
     }
 
     def self.delete_server(id)
