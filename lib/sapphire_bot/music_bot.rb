@@ -32,11 +32,10 @@ module SapphireBot
     def self.update_game_status
       servers_with_music_playing = BOT.voices.size
       SapphireBot::BOT.game = if servers_with_music_playing > 0
-                   "music on #{servers_with_music_playing} server#{'s' if servers_with_music_playing != 1}!"
-                 else
-                   false
+                                "music on #{servers_with_music_playing} server#{'s' if servers_with_music_playing != 1}!"
+                              else
+                                false
                  end
-      rescue => e; Discordrb::LOGGER.log_exception(e)
     end
   end
 end
