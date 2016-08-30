@@ -115,16 +115,15 @@ module SapphireBot
     exit!
   end
 
-  Thread.new do
-    loop do
-      STATS.update
-      ServerConfig.save
-      STATS.save
-      sleep(60)
-    end
-  end
-
   LOGGER.info "Oauth url: #{BOT.invite_url}+&permissions=#{CONFIG.permissions_code}"
   LOGGER.info 'Use ctrl+c to safely stop the bot.'
-  BOT.run
+  BOT.run(:async)
+
+  loop do
+    STATS.update
+    MusicBot.update_game_status
+    ServerConfig.save
+    STATS.save
+    sleep(10)
+  end
 end

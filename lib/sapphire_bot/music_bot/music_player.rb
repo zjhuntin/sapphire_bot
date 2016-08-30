@@ -23,8 +23,6 @@ module SapphireBot
       # An array that holds songs.
       attr_reader :queue
 
-      @@servers_with_music_playing = 0
-
       def initialize(id)
         @id = id
         @queue = []
@@ -36,7 +34,6 @@ module SapphireBot
         delete_dir if Dir.exist?(@server_dir)
 
         afk_timer
-        game_status_loop
       end
 
       # Downloads the song and returns true if it succeeded.
@@ -211,32 +208,6 @@ module SapphireBot
           end
 
           nil
-        end
-      end
-
-      # Updates Bot's game status with number of songs being played.
-      def game_status_loop
-        Thread.new do
-          # Make sure not to add of subtract multiple times.
-          last_action = :subtracted
-
-          loop do
-            if @playing && last_action != :added
-              @@servers_with_music_playing += 1
-              last_action = :added
-            elsif !@playing && last_action != :subtracted
-              @@servers_with_music_playing -= 1
-              last_action = :subtracted
-            end
-
-            BOT.game = if @@servers_with_music_playing > 0
-                         "music on #{@@servers_with_music_playing} server#{'s' if @@servers_with_music_playing != 1}!"
-                       else
-                         false
-                       end
-
-            sleep(10)
-          end
         end
       end
     end
