@@ -27,7 +27,6 @@ module SapphireBot
       @start_time = Time.now.to_i
 
       create_methods
-      start_loop
     end
 
     def update
@@ -52,17 +51,6 @@ module SapphireBot
 
         self.class.send(:define_method, "#{key}=") do |value|
           @stats[key] = value
-        end
-      end
-    end
-
-    # Starts a loop that updates and saves stats every 60 seconds.
-    def start_loop
-      Thread.new do
-        loop do
-          update
-          save
-          sleep(60)
         end
       end
     end
