@@ -30,7 +30,8 @@ module SapphireBot
       Queue,
       ClearQueue,
       Skip,
-      Repeat
+      Repeat,
+      Download
     ]
 
     def self.include!

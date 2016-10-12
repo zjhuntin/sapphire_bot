@@ -29,9 +29,13 @@ module SapphireBot
         @repeat = false
         @skip = false
         @playing = false
-        @server_dir = "#{Dir.pwd}/data/music_bot/#{id}"
+        @server_dir = "#{Dir.pwd}/data/music_bot/#{id}/"
 
-        delete_dir if Dir.exist?(@server_dir)
+        if Dir.exist?(@server_dir)
+          clean_directory
+        else
+          Dir.mkdir(@server_dir)
+        end
 
         afk_timer
       end
@@ -77,11 +81,7 @@ module SapphireBot
       def table
         Terminal::Table.new(headings: %w(# Name Duration Link)) do |t|
           @queue.each_with_index do |song, index|
-            title = if song.title.length >= 15
-                      song.title[0..15].chomp + '...'
-                    else
-                      song.title
-                    end
+            title = song.truncated_title
             duration = song.duration_formated
             url = "<#{song.url}>"
             t.add_row([index + 1, title, duration, url])
@@ -96,7 +96,7 @@ module SapphireBot
       end
 
       def delete_song_at(index)
-        @queue[index].delete_file
+        @queue[index].delete
         @queue.delete_at(index)
       end
 
@@ -120,7 +120,7 @@ module SapphireBot
 
       # Plays a song and keeps looping it if @repeat is set to true. Deletes it after it has finished.
       def play_song(song)
-        message = respond("Playing \"#{song.title}\" (#{song.duration_formated}) #{song.url}")
+        message = respond("Playing #{song.inspect}")
         LOGGER.debug "Playing a song (#{song.inspect}), repeating: #{@repeat}"
         loop do
           @voice.play_file(song.path)
@@ -137,7 +137,7 @@ module SapphireBot
       def wait_for_song(song)
         retries = 0
         loop do
-          LOGGER.debug "Waiting for song to be available on server #{@id} (#{song.inspect}) #{"(#{retries})" if retries > 0}"
+          LOGGER.debug "Waiting for song to be available on server #{@id} (#{song.inspect}) #{"(#{retries})" if retries.positive?}"
           return true if song.ready
           if retries > 3
             LOGGER.debug "Song was not available after #{retries} retries on server #{@id}. (#{song.inspect})"
@@ -155,7 +155,7 @@ module SapphireBot
 
       # Finds a song in the queue and deletes it.
       def delete_song(song)
-        @queue.find { |x| x == song }.delete_file
+        @queue.find { |x| x == song }.delete
         @queue.delete(song)
       end
 
@@ -208,6 +208,13 @@ module SapphireBot
           end
 
           nil
+        end
+      end
+
+      def clean_directory
+        Dir.foreach(@server_dir) do |file|
+          fn = File.join(@server_dir, file)
+          File.delete(fn) if fn[-1] != '.'
         end
       end
     end

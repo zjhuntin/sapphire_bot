@@ -4,11 +4,11 @@ require 'fileutils'
 require 'open-uri'
 
 # Gems.
+require 'bundler/setup'
 require 'google/apis/youtube_v3'
 require 'google/apis/urlshortener_v1'
-require 'discordrb'
-require 'terminal-table'
-require 'youtube-dl.rb'
+
+Bundler.require(:default)
 
 # Methods that should be accessible everywhere.
 module Kernel
@@ -74,17 +74,20 @@ end
 
 # Base module for sapphire.
 module SapphireBot
-  require_relative 'sapphire_bot/logger'
+  run_supressed { Discordrb::LOG_TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M:%S' }
 
-  # Set debug mode if command line arguments include "-debug".
-  run_supressed do
-    debug = ARGV.include?('-debug') ? true : false
-    Discordrb::LOGGER = LOGGER = if debug
-                                   SapphireBot::Logger.new(:debug)
-                                 else
-                                   SapphireBot::Logger.new
-                                 end
+  debug = ARGV.include?('-debug') ? :debug : false
+  log_streams = [STDOUT]
+
+  if debug
+    timestamp = Time.now.strftime(Discordrb::LOG_TIMESTAMP_FORMAT).tr(':', '-')
+    log_file = File.new("#{Dir.pwd}/logs/#{timestamp}.log", 'a+')
+    log_streams.push(log_file)
   end
+
+  run_supressed { LOGGER = Discordrb::LOGGER = Discordrb::Logger.new(nil, log_streams) }
+
+  LOGGER.debug = true if debug
 
   require_relative 'sapphire_bot/other/store_data'
   require_relative 'sapphire_bot/config'
@@ -99,7 +102,8 @@ module SapphireBot
   BOT = Discordrb::Commands::CommandBot.new(token: CONFIG.discord_token,
                                             application_id: CONFIG.discord_client_id,
                                             prefix: CONFIG.prefix,
-                                            advanced_functionality: false)
+                                            advanced_functionality: false,
+                                            fancy_log: true)
   GOOGLE = GoogleServices.new
   STATS = Stats.new
 

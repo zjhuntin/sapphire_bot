@@ -16,9 +16,12 @@ MutableConstant:
   Enabled: false
 ClassVars:
   Enabled: false
+FrozenStringLiteralComment:
+  Enabled: False
 
 AllCops:
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.3
   Exclude:
     - 'data/*'
     - 'lib/sapphire_bot/config.rb'
+    - 'Gemfile'

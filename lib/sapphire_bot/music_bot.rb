@@ -31,11 +31,11 @@ module SapphireBot
     # Updates bot's game status with number of songs being played.
     def self.update_game_status
       servers_with_music_playing = BOT.voices.size
-      SapphireBot::BOT.game = if servers_with_music_playing > 0
+      SapphireBot::BOT.game = if servers_with_music_playing.positive?
                                 "music on #{servers_with_music_playing} server#{'s' if servers_with_music_playing != 1}!"
                               else
                                 false
-                 end
+                              end
     end
   end
 end
