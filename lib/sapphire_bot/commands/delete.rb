@@ -9,7 +9,7 @@ module SapphireBot
         if event.bot.profile.on(event.server).permission?(:manage_messages,
                                                           event.channel)
           ammount = ammount.to_i
-          next "Can't delete less than 2 messages." if ammount <= 2
+          next "Can't delete less than 2 messages." if ammount < 2
 
           while ammount > 100
             event.channel.prune(100)
