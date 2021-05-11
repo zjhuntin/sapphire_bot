@@ -1,5 +1,6 @@
 module SapphireBot
   module Commands
+    # Sets values of different bot settings serwer-wide.
     module Set
       extend Discordrb::Commands::CommandContainer
       command(:set, description: 'Allows you to set values of different bot settings server-wide.',
@@ -12,15 +13,15 @@ module SapphireBot
             value = value.to_i
             if value.between?(setting_info[:min], setting_info[:max])
               event.server.update_config(setting => value)
-              event << "#{setting_info[:description]} is now set to #{value}."
+              "#{setting_info[:description]} is now set to #{value}."
             else
-              event << "The value must be between #{setting_info[:min]} and #{setting_info[:max]}."
+              "The value must be between #{setting_info[:min]} and #{setting_info[:max]}."
             end
           else
-            event << "Use `#{setting_info[:command]}` instead of `set` for this setting."
+            "Use `#{setting_info[:command]}` instead of `set` for this setting."
           end
         else
-          event << 'Unknown setting.'
+          'Unknown setting.'
         end
       end
     end

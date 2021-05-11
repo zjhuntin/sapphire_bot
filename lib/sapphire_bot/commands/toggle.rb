@@ -1,7 +1,7 @@
 module SapphireBot
   module Commands
+    # Toggles bot settings server-wide.
     module Toggle
-      extend Helpers
       extend Discordrb::Commands::CommandContainer
       command(:toggle, description: 'Allows you to toggle different bot settings server-wide.',
                        usage: 'toggle <setting>',
@@ -12,12 +12,12 @@ module SapphireBot
           setting_info = SapphireBot::ServerConfig.settings_info[setting]
           if setting_info[:command] == :toggle
             event.server.update_config(setting => !event.server.config[setting])
-            event << "#{setting_info[:description]} is now #{bool_to_words(event.server.config[setting])}."
+            "#{setting_info[:description]} is now #{bool_to_words(event.server.config[setting], :enabled)}."
           else
-            event << "Use `#{setting_info[:command]}` instead of `toggle` for this setting."
+            "Use `#{setting_info[:command]}` instead of `toggle` for this setting."
           end
         else
-          event << 'Unknown setting.'
+          'Unknown setting.'
         end
       end
     end

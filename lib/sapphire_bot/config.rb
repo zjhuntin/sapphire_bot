@@ -1,10 +1,11 @@
 module SapphireBot
+  # Holds sapphire configuration.
   class Config
     include StoreData
 
     def initialize
-      file = "#{Dir.pwd}/data/config.yml"
-      temp = load_file(file)
+      @file = "#{Dir.pwd}/data/config.yml"
+      temp = load_file(@file)
       @config = temp if temp.is_a?(Hash) && !temp.empty?
       setup_config if @config.nil?
       create_methods
@@ -36,14 +37,6 @@ module SapphireBot
       puts 'Enter your permissions code. Press enter for default (66321471)'
       @config[:permissions_code] = gets.chomp
       @config[:permissions_code] = 66321471 if @config[:permissions_code].empty?
-
-      puts 'Enable music bot features? (y/n)'
-      @config[:music_bot] = if gets.chomp == 'y'
-                              true
-                            else
-                              false
-                            end
-
       save
     end
 

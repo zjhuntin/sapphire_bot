@@ -7,6 +7,8 @@ A simple bot for discord made with [discordrb](https://github.com/meew0/discordr
 
 ### Features
 
+* Youtube music bot! Join a voice channel, use the `join` command and add songs with `add <song name>` command.
+
 * Automatic link shortening with https://goo.gl/. Whenever a link within a message is detected, the message gets replaced and all its links shortened. Example:
 
   `PoVa: look at his dank maymay m8: http://img.ifcdn.com/images/a52e08ff36a62190f8259a6b5e9aa2f9f9a86bb841bc6b01aa6cbacc7bbe846f_1.jpg`
@@ -66,7 +68,6 @@ Commands start with a prefix, which is `!` by default.
 
   * `eval <code>` evaluates Ruby expression(s). **USE WITH EXTREME CAUTION**
   * `avatar <url>` sets avatar of this bot.
-  * `game <text>` sets game status of the bot.
 
 
 ### Support
@@ -79,7 +80,7 @@ You can find me (@PoVa, ID109268519115329536) on this server: https://discord.gg
 * Tests
 
 ### Installing and running
-1. Make sure you have `git` and `bundler` installed, then
+1. Make sure you have `git` and `bundler` gem installed, then
 
    `$ git clone https://github.com/PoVa/sapphire_bot.git`
 
@@ -91,22 +92,35 @@ You can find me (@PoVa, ID109268519115329536) on this server: https://discord.gg
 
   `sudo apt-get install libav-tools`
 
-4. (optional) Remove `music` from command in the following step.
+4. Run `bundle install`
 
-5. Run `bundle install`
+  `$ bundle install --without development`
 
-  `$ bundle install --without development music`
+5. (Windows only) Uncomment and modify this line in `run.rb` file:
 
-4. Run the bot.
+  `#::RBNACL_LIBSODIUM_GEM_LIB_PATH = "PATH TO LIBSODIUM"`
 
-   `$ ./run`
+6. Run the bot.
+
+  * Linux:
+
+      `$ ./run.sh`
+
+  * Windows:
+
+      Just double click `run.bat` icon, you peasant.
+
+  * Literally anywhere:
+
+      `$ ruby run.rb`
+
 
 After you've done with configuration, invite url should pop up, use it to make the bot join your server.
 
 ### Updating
 
   `$ git pull`
-  
+
   `$ bundle install`
 
 ### Debugging

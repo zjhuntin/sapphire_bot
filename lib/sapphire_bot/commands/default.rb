@@ -1,8 +1,8 @@
 module SapphireBot
   module Commands
+    # Resets a single or all messages to default.
     module Default
       extend Discordrb::Commands::CommandContainer
-      extend Helpers
       command(:default, description: 'Resets server setting (or all settings) to default',
                         usage: 'default <setting/all>',
                         required_permissions: [:manage_server],
@@ -15,7 +15,7 @@ module SapphireBot
           settings_info.each do |key, value|
             event.server.update_config(key => value[:default])
           end
-          event << 'All settings set to default values.'
+          'All settings set to default values.'
         elsif event.server.config.keys.include?(setting.to_sym)
           event.server.update_config(setting => setting_info[:default])
           default = if setting_info[:default].is_a?(TrueClass) ||
@@ -24,9 +24,9 @@ module SapphireBot
                     else
                       setting_info[:default]
                     end
-          event << "#{setting_info[:description]} set to default, which is #{default}."
+          "#{setting_info[:description]} set to default, which is #{default}."
         else
-          event << 'Unknown setting.'
+          'Unknown setting.'
         end
       end
     end

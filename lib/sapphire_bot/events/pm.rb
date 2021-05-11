@@ -1,10 +1,10 @@
 module SapphireBot
   module Events
+    # Sends messages to every channel bot is connected to, when receives a message from owner.
     module MassMessage
       extend Discordrb::EventContainer
-      extend Helpers
       pm(from: CONFIG.owner_id) do |event|
-        text = shorten_text(event)
+        text = event.message.content
         event.bot.servers.values.each do |server|
           bot_profile = event.bot.profile.on(server)
           server.text_channels.each do |channel|

@@ -1,5 +1,6 @@
 module SapphireBot
   module Commands
+    # Deletes specified ammount of messages from the channel.
     module Delete
       extend Discordrb::Commands::CommandContainer
       command(:delete, description: 'Deletes messages in this channel.',
@@ -8,11 +9,7 @@ module SapphireBot
         if event.bot.profile.on(event.server).permission?(:manage_messages,
                                                           event.channel)
           ammount = ammount.to_i
-
-          if ammount <= 2
-            event << "Can't delete less than 2 messages."
-            return
-          end
+          next "Can't delete less than 2 messages." if ammount < 2
 
           while ammount > 100
             event.channel.prune(100)

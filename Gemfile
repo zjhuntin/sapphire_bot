@@ -1,13 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'discordrb',            '~> 2.1.2'
-gem 'terminal-table',       '~> 1.5.2'
-gem 'google-api-client',    '0.9.6'
-
-group :music do
-  gem 'youtube-dl.rb',      '~> 0.3.0.2016.05.01'
-end
+gem 'discordrb',            '~> 3.0'
+gem 'terminal-table',       '~> 1.6'
+gem 'youtube-dl.rb',        '~> 0.3.1'
+gem 'google-api-client',    '0.9.11', require: false
 
 group :development do
-  gem 'rubocop',            '0.39.0'
+  gem 'rubocop', '~> 0.42.0'
 end

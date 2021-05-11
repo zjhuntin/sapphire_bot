@@ -1,4 +1,5 @@
 module SapphireBot
+  # Stores bot statistics.
   class Stats
     include StoreData
 
@@ -26,7 +27,6 @@ module SapphireBot
       @start_time = Time.now.to_i
 
       create_methods
-      start_loop
     end
 
     def update
@@ -40,15 +40,9 @@ module SapphireBot
       save_to_file(@file, @stats)
     end
 
-    def inspect
-      LOGGER.debug "Users: #{@users}"
-      LOGGER.debug "Servers: #{@servers}"
-      LOGGER.debug "Uptime: #{@uptime}"
-      @stats.each { |key, value| LOGGER.debug "#{key.to_s.tr('_', ' ').capitalize}: #{value} " }
-    end
-
     private
 
+    # Creates get and set methods from hash keys.
     def create_methods
       @stats.keys.each do |key|
         self.class.send(:define_method, key) do
@@ -57,17 +51,6 @@ module SapphireBot
 
         self.class.send(:define_method, "#{key}=") do |value|
           @stats[key] = value
-        end
-      end
-    end
-
-    def start_loop
-      Thread.new do
-        loop do
-          update
-          save
-          inspect
-          sleep(60)
         end
       end
     end
